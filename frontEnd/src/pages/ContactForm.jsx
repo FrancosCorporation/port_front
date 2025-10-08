@@ -3,7 +3,6 @@ import React, { useRef, useState } from 'react';
 const botToken = process.env.REACT_APP_BOT_KEY;
 // ⚠️ Substitua pelos dados REAIS (o NOVO token e seu chat_id)
 const chatId = process.env.REACT_APP_ID_TELEGRAM; // ex: 123456789
-console.log(chatId,botToken)
 
 const ContactForm = () => {
   const formRef = useRef();

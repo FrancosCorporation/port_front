@@ -11,6 +11,8 @@
     "framer-motion": "^12.23.14",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "react-native": "^0.82.0",
+    "react-router-dom": "^7.9.3",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
