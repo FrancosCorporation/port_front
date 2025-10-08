@@ -5,9 +5,8 @@ function Header({ handleScrollToSection }) {
 
   const toggleMobileMenu = () => setMenuOpen(!menuOpen);
 
-  const handleNavClick = (sectionId, redirect = false) => {
+  const handleNavClick = (sectionId,) => {
     handleScrollToSection(sectionId);
-    if (redirect) window.location.href = '/';
     setMenuOpen(false); // fecha menu mobile ao clicar
   };
 
@@ -23,7 +22,7 @@ function Header({ handleScrollToSection }) {
         <nav className={`nav ${menuOpen ? 'active' : ''}`}>
           <ul className="nav-list">
             <li>
-              <button className="nav-button" onClick={() => handleNavClick('home', true)}>
+              <button className="nav-button" onClick={() => handleNavClick('home')}>
                 Home
               </button>
             </li>
