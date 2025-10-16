@@ -1,13 +1,8 @@
 {
   "scripts": {
-    "start": "concurrently \"npm run start --prefix backend\" \"npm run start --prefix frontend\""
+    "start": "concurrently \"npm start --prefix backEnd\" \"npm start --prefix frontEnd\""
   },
   "devDependencies": {
     "concurrently": "^9.2.1"
-  },
-  "dependencies": {
-    "@fortawesome/fontawesome-free": "^7.1.0",
-    "react-native": "^0.81.4",
-    "react-router-dom": "^6.30.1"
   }
 }
