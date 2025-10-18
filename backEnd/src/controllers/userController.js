@@ -2,7 +2,8 @@ const User = require('../models/userModel');
 const bcrypt = require('bcryptjs');
 
 // Criação de usuário
-const createUser = async (req, res) => {
+const userController = {
+createUser : async (req, res) => {
   const { name, email, password } = req.body;
 
   try {
@@ -32,6 +33,23 @@ const createUser = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: 'Erro ao criar usuário', error: error.message });
   }
-};
+},
+getAllUsers : async (req, res) => {
+  try {
+    // busca todos os usuários no banco
+    const users = await User.find({}, 'name email'); // seleciona apenas name e email, sem a senha
 
-module.exports = { createUser };
+    res.status(200).json({
+      message: 'Lista de usuários',
+      users: users.map(user => ({
+        id: user._id,
+        name: user.name,
+        email: user.email,
+      })),
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Erro ao buscar usuários', error: error.message });
+  }
+},
+};
+module.exports = userController
