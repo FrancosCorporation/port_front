@@ -17,10 +17,13 @@ fi
 DOCKER_REPO="https://download.docker.com/linux/debian"
 DOCKER_KEY="/etc/apt/keyrings/docker.gpg"
 DOCKER_LIST="/etc/apt/sources.list.d/docker.list"
-MONGO_CONTAINER="meu_mongo"
-MONGO_ROOT_USER="root"
-MONGO_ROOT_PASS="senha123"
-
+# Carrega variáveis válidas do .env de forma segura
+if [ -f .env ]; then
+    export $(grep -v '^#' .env | grep -E '^[A-Za-z_][A-Za-z0-9_]*=.*' | xargs)
+    echo "✅ Variáveis carregadas do .env"
+else
+    echo "ℹ️ Arquivo .env não encontrado, usando valores padrão."
+fi
 # -----------------------------
 # 3️⃣ Função: limpar instalações Docker quebradas
 # -----------------------------
