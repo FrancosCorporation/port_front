@@ -391,20 +391,10 @@ input:checked + .slider:before {
   flex: 1;
 }
 
-.section-title {
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
-  color: white;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
 
 .section-title i {
   font-size: 1.6rem;
-  color: #fff;
+  color: #007bff;
 }
 
 /* Adicionar Item - Form com Labels Flutuantes */

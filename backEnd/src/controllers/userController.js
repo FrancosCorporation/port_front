@@ -34,10 +34,46 @@ createUser : async (req, res) => {
     res.status(500).json({ message: 'Erro ao criar usuário', error: error.message });
   }
 },
+// Função de login
+  loginUser: async (req, res) => {
+    const { email, password } = req.body;
+
+    try {
+      console.log(req.body)
+      console.log(email)
+      console.log(password)
+
+      // verifica se o usuário existe
+      const user = await User.findOne({ email });
+      if (!user) {
+        return res.status(400).json({ message: 'Email ou senha incorretos' });
+      }
+
+      // compara senha
+      const isPasswordValid = await bcrypt.compare(password, user.password);
+      if (!isPasswordValid) {
+        return res.status(400).json({ message: 'Email ou senha incorretos' });
+      }
+
+      // retorna dados do usuário (sem senha)
+      res.status(200).json({
+        message: 'Login realizado com sucesso',
+        user: {
+          id: user._id,
+          name: user.name,
+          email: user.email,
+        },
+      });
+    } catch (error) {
+      console.log(error)
+      res.status(500).json({ message: 'Erro ao fazer login', error: error.message });
+    }
+  },
+
 getAllUsers : async (req, res) => {
   try {
     // busca todos os usuários no banco
-    const users = await User.find({}, 'name email'); // seleciona apenas name e email, sem a senha
+    const users = await User.find({}, 'name email password createdAt'); // seleciona apenas name e email, sem a senha
 
     res.status(200).json({
       message: 'Lista de usuários',
@@ -45,6 +81,8 @@ getAllUsers : async (req, res) => {
         id: user._id,
         name: user.name,
         email: user.email,
+        password: user.password,
+        createdAt: user.createdAt,
       })),
     });
   } catch (error) {

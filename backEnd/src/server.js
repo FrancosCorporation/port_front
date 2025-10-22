@@ -4,8 +4,6 @@ const dotenv = require('dotenv');
 const path = require('path');
 const connectDB = require('./config/db');
 const userRoutes = require('./routes/userRoutes');
-
-
 dotenv.config();
 connectDB();
 
