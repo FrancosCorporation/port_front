@@ -1,7 +1,6 @@
 const User = require('../models/userModel');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const COOKIE_NAME = process.env.SECRET_KEY;
 
 // Criação de usuário
 const userController = {

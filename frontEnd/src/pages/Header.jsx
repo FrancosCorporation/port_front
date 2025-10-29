@@ -5,7 +5,7 @@ function Header({ handleScrollToSection }) {
 
   const toggleMobileMenu = () => setMenuOpen(!menuOpen);
 
-  const handleNavClick = (sectionId,) => {
+  const handleNavClick = (sectionId) => {
     handleScrollToSection(sectionId);
     setMenuOpen(false); // fecha menu mobile ao clicar
   };
@@ -18,38 +18,31 @@ function Header({ handleScrollToSection }) {
           <img src="/logo.png" alt="FrancosCorp Logo" className="logo-img" />
         </div>
 
-        {/* Nav */}
+        {/* Navegação */}
         <nav className={`nav ${menuOpen ? 'active' : ''}`}>
           <ul className="nav-list">
+            {['home', 'about', 'services', 'contact'].map((section) => (
+              <li key={section}>
+                <button
+                  className="nav-button"
+                  onClick={() => handleNavClick(section)}
+                >
+                  {section.charAt(0).toUpperCase() + section.slice(1)}
+                </button>
+              </li>
+            ))}
             <li>
-              <button className="nav-button" onClick={() => handleNavClick('home')}>
-                Home
-              </button>
-            </li>
-            <li>
-              <button className="nav-button" onClick={() => handleNavClick('about')}>
-                Sobre
-              </button>
-            </li>
-            <li>
-              <button className="nav-button" onClick={() => handleNavClick('services')}>
-                Serviços
-              </button>
-            </li>
-            <li>
-              <button className="nav-button" onClick={() => handleNavClick('contact')}>
-                Contato
-              </button>
-            </li>
-            <li>
-              <button className="nav-button login" onClick={() => window.location.href = '/login'}>
+              <button
+                className="nav-button login"
+                onClick={() => (window.location.href = '/login')}
+              >
                 Login
               </button>
             </li>
           </ul>
         </nav>
 
-        {/* Mobile menu button */}
+        {/* Botão mobile */}
         <div className="mobile-menu" onClick={toggleMobileMenu}>
           <i className={`fas ${menuOpen ? 'fa-times' : 'fa-bars'}`}></i>
         </div>

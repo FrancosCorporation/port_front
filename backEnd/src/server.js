@@ -12,7 +12,8 @@ connectDB();
 const app = express();
 
 app.use(cors({
-  origin: process.env.URL_FRONT, // URL do seu frontend React
+  //origin: process.env.URL_FRONT, // URL do seu frontend React
+  origin: true, // URL qualquer origem
   credentials: true, // permite enviar cookies
 }));
 
