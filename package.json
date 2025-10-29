@@ -4,5 +4,8 @@
   },
   "devDependencies": {
     "concurrently": "^9.2.1"
+  },
+  "dependencies": {
+    "fortawesome": "^0.0.1-security"
   }
 }

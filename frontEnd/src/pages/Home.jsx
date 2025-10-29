@@ -1,4 +1,4 @@
-import ContactForm from '../forms/ContactForm'; // Assumindo que existe; use o placeholder se não tiver
+import ContactForm from '../components/ContactForm'; // Assumindo que existe; use o placeholder se não tiver
 import './Home.css';
 import Header from './Header'
 function App() {

@@ -1,0 +1,17 @@
+{
+	"version": "1.0.0",
+	"configurations": [
+		{
+			"id": "hqkyxopf2kmh8ajvsmeq1zgg01d8w",
+			"name": "FLUIG",
+			"host": "192.168.1.162",
+			"ssl": false,
+			"port": 8080,
+			"username": "wcmadmin",
+			"password": "eyJpdiI6IjMxZGM3ODNkMDg3MDgxNWI3Yzc3MDhjNDI3NDhjOTBjIiwic2FsdCI6IjY0YzNjYTBiZDUyMjA0MzE4YmMyYTFkMTY2ODg5ZGZkIiwidGV4dCI6IjdjZTQzNTg2ZmQ1MTI0NWY1Y2U3YmM1NWU5NGRmNGE1In0=",
+			"userCode": null,
+			"confirmExporting": false,
+			"companyId": 0
+		}
+	]
+}
