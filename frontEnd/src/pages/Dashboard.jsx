@@ -2,13 +2,32 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Dashboard.css'; // CSS polido para beleza
 
+// --- SIMULAÇÃO DE API ---
+// Função que simula buscar o perfil no backend, assumindo que o JWT no cookie é válido.
+// Em um app real, aqui você faria um 'fetch' para '/api/profile'
+const fetchUserProfile = async () => {
+  // SIMULAÇÃO: Se o fetch for bem-sucedido (o token no cookie validou), ele retorna os dados.
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve({
+        name: 'Usuário Autenticado',
+        email: 'autenticado@api.com',
+      });
+    }, 500); // Simula um delay de rede
+  });
+};
+// -------------------------
+
 function Dashboard() {
   const navigate = useNavigate();
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
   const [profile, setProfile] = useState({
-    name: localStorage.getItem('profileName') || 'Usuário Exemplo',
-    email: localStorage.getItem('profileEmail') || 'user@example.com',
+    name: localStorage.getItem('profileName') || '', // Inicializa vazio para forçar busca/redirecionamento
+    email: localStorage.getItem('profileEmail') || '',
   });
+  const [loading, setLoading] = useState(true); // Novo estado de loading
+  // ... (outros estados como showProfileModal, items, etc.)
+
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [showEditItemModal, setShowEditItemModal] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
@@ -18,26 +37,58 @@ function Dashboard() {
   const [profileEdit, setProfileEdit] = useState({ ...profile });
   const [errors, setErrors] = useState({});
 
+  // Efeito principal: Verificação de Autenticação e Busca de Perfil
+  useEffect(() => {
+    const checkAuthAndFetchProfile = async () => {
+      // 1. Verificar se o perfil JÁ está no localStorage (login recente)
+      if (profile.name && profile.email) {
+        setLoading(false);
+        return;
+      }
+      
+      // 2. Tentar buscar o perfil (Assume-se que o JWT Cookie está lá e o backend o lerá)
+      try {
+        setLoading(true);
+        const user = await fetchUserProfile(); // Esta função usa o Cookie implicitamente
+        
+        // Se a busca for bem-sucedida, atualiza o estado e o localStorage
+        setProfile(user);
+        setProfileEdit(user);
+        localStorage.setItem('profileName', user.name);
+        localStorage.setItem('profileEmail', user.email);
+        
+      } catch (error) {
+        // Se a busca falhar (o backend retorna 401 Unauthorized porque o Cookie expirou/não existe)
+        console.error('Falha na autenticação/busca de perfil:', error);
+        localStorage.clear(); // Limpa qualquer dado local antigo
+        navigate('/login', { replace: true }); // Redireciona para login e impede o retorno
+        return; 
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    checkAuthAndFetchProfile();
+  }, [navigate, profile.name, profile.email]); // Dependências: profile.name/email para evitar loop, navigate é estável.
+
+
   // Aplicar tema
   useEffect(() => {
-    document.body.className = theme; // Aplica 'light' ou 'dark' ao body
+    document.body.className = theme;
     localStorage.setItem('theme', theme);
-    console.log('Tema aplicado:', theme); // DEBUG: Ver no console se muda
   }, [theme]);
 
   // Persistir dados
   useEffect(() => {
-    localStorage.setItem('profileName', profile.name);
-    localStorage.setItem('profileEmail', profile.email);
     localStorage.setItem('items', JSON.stringify(items));
-  }, [profile, items]);
+    // Perfil só é salvo no localStorage após o fetch para evitar dados "antigos"
+  }, [items]);
 
+  // --- Funções Auxiliares (mantidas as originais) ---
   const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   const handleThemeToggle = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(newTheme);
-    console.log('Toggle clicado - Novo tema:', newTheme); // DEBUG: Ver se onChange dispara
+    setTheme(theme === 'light' ? 'dark' : 'light');
   };
 
   const handleProfileEditChange = (e) => {
@@ -58,9 +109,14 @@ function Dashboard() {
     }
 
     setProfile(profileEdit);
+    // Persiste as alterações do perfil no localStorage imediatamente
+    localStorage.setItem('profileName', profileEdit.name);
+    localStorage.setItem('profileEmail', profileEdit.email);
+
     setShowProfileModal(false);
   };
-
+  
+  // Funções de CRUD (AddItem, EditItem, DeleteItem) mantidas...
   const handleNewItemChange = (e) => {
     const { name, value } = e.target;
     setNewItem({ ...newItem, [name]: value });
@@ -130,9 +186,24 @@ function Dashboard() {
     if (status === 'concluido') return <i className="fas fa-check-circle status-icon completed"></i>;
     return <i className="fas fa-clock status-icon pending"></i>;
   };
+  // Fim das Funções de CRUD
 
+  // Exibe tela de carregamento enquanto verifica a autenticação
+  if (loading || !profile.name) {
+    return (
+        <div className="loading-screen">
+          <div className="spinner"></div>
+          <p>Verificando autenticação e carregando perfil...</p>
+        </div>
+    );
+  }
+
+  // O JSX original começa aqui
   return (
     <div className={`dashboard ${theme}`}>
+      {/* O resto do JSX (Header, Main, Modals) permanece o mesmo */}
+      {/* Certifique-se de que a tela de loading/spinner está definida no CSS */}
+
       {/* Header */}
       <header className="dashboard-header">
         <div className="container">
@@ -160,14 +231,14 @@ function Dashboard() {
 
             <div className="profile-section">
               <div className="avatar-wrapper">
-                <img src="https://via.placeholder.com/50?text=US" alt="Avatar" className="avatar" />
+                <img src={`https://ui-avatars.com/api/?name=${profile.name.split(' ').join('+')}&background=049cfc&color=fff`} alt="Avatar" className="avatar" />
                 <div className="avatar-glow"></div>
               </div>
               <div className="profile-info">
                 <span className="profile-name">{profile.name}</span>
                 <span className="profile-email">{profile.email}</span>
               </div>
-              <button className="edit-profile-btn" onClick={() => setShowProfileModal(true)}>
+              <button className="edit-profile-btn" onClick={() => { setProfileEdit({ ...profile }); setShowProfileModal(true); }}>
                 <i className="fas fa-cog"></i>
               </button>
               <button className="logout-btn" onClick={handleLogout}>
@@ -330,7 +401,7 @@ function Dashboard() {
         </div>
       )}
 
-      {/* Modal Editar Item - Continuação do Corte */}
+      {/* Modal Editar Item */}
       {showEditItemModal && editingItem && (
         <div className="modal-overlay" onClick={() => setShowEditItemModal(false)}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { sendForm } from './functionsReUsed'; // Função genérica
+import { sendForm } from './functionsReUsed';
 import './Login.css';
 
 function Login() {
@@ -33,25 +33,15 @@ function Login() {
 
     try {
       const response = await sendForm({
-        url: '/api/login', // rota backend
+        url: 'api/login',
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: formData,
       });
 
-      console.log('Login Response:', response);
-
-      // Se a API retornar token
-      if (response.token) {
-        localStorage.setItem('authToken', response.token);
-        navigate('/'); // redireciona para dashboard/home
-      } else if (response.message) {
-        alert(response.message);
-      } else {
-        alert('Erro ao logar');
-      }
+      console.log('✅ Login Response:', response);
+      navigate('/Dashboard');
     } catch (err) {
-      alert(err.message || 'Erro de conexão ou dados inválidos');
+      alert(err.message || 'Erro ao logar');
     } finally {
       setIsLoading(false);
     }
@@ -78,22 +68,13 @@ function Login() {
                   onChange={handleChange}
                   className={errors[field] ? 'error' : ''}
                   required
-                  minLength={field === 'password' ? 6 : undefined}
                 />
               </div>
               {errors[field] && <span className="error-message">{errors[field]}</span>}
             </div>
           ))}
           <button type="submit" className="auth-button" disabled={isLoading}>
-            {isLoading ? (
-              <>
-                <i className="fas fa-spinner fa-spin"></i> Entrando...
-              </>
-            ) : (
-              <>
-                <i className="fas fa-arrow-right"></i> Entrar
-              </>
-            )}
+            {isLoading ? <><i className="fas fa-spinner fa-spin"></i> Entrando...</> : <>Entrar</>}
           </button>
         </form>
         <div className="auth-footer">

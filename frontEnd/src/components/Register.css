@@ -28,3 +28,20 @@
   font-size: 3rem;
   color: #049cfc;
 }
+.input-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.toggle-visibility {
+  position: absolute;
+  right: 10px;
+  color: #888;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.toggle-visibility:hover {
+  color: #007bff;
+}

@@ -4,16 +4,23 @@ const dotenv = require('dotenv');
 const path = require('path');
 const connectDB = require('./config/db');
 const userRoutes = require('./routes/userRoutes');
+const cookieParser = require("cookie-parser");
 dotenv.config();
 connectDB();
 
+
 const app = express();
 
-app.use(cors());
-app.use(express.json());
+app.use(cors({
+  origin: process.env.URL_FRONT, // URL do seu frontend React
+  credentials: true, // permite enviar cookies
+}));
 
+app.use(express.json());
+app.use(cookieParser()); 
 // Rotas da API
 app.use('/api', userRoutes);
+
 
 // Servir arquivos estáticos da pasta public
 app.use(express.static(path.join(__dirname, 'public')));
