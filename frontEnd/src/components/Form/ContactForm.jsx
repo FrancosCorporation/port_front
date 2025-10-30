@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { sendForm } from './functionsReUsed';
+import { sendForm } from '../../utils/functionsReUsed';
 import './FormBase.css';
 
 function ContactForm() {

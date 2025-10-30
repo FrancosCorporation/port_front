@@ -1,6 +1,6 @@
 import React from 'react';
-import ContactForm from '../components/ContactForm';
-import Header from './Header';
+import ContactForm from '../../components/Form/ContactForm';
+import Header from '../Header';
 import './Home.css';
 
 function Home() {

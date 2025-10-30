@@ -1,3 +1,6 @@
+const PORT = process.env.PORT || 5000;
+const fs=require('fs');
+const https = require('https');
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
@@ -17,6 +20,12 @@ app.use(cors({
   credentials: true, // permite enviar cookies
 }));
 
+const options = {
+  key: fs.readFileSync('./src/config/cert/localhost-key.pem'),
+  cert: fs.readFileSync('./src/config/cert/localhost.pem')
+};
+
+
 app.use(express.json());
 app.use(cookieParser()); 
 // Rotas da API
@@ -32,5 +41,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use((req, res, next) => {
   res.status(404).sendFile(path.join(__dirname, 'public', '404.html'));
 });
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
+https.createServer(options, app).listen(5000, () => {
+  console.log('✅ Servidor HTTPS em https://localhost:5000');
+});
