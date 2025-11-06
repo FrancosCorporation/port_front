@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { sendForm } from '../../utils/functionsReUsed';
-import '../Form/FormBase.css';
 
 function Register() {
   const [formData, setFormData] = useState({ name: '', email: '', password: '', confirmPassword: '' });

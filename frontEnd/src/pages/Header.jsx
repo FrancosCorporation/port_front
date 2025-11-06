@@ -1,13 +1,15 @@
 import { useState } from 'react';
+import { useTheme } from '../components/Theme/ThemeProvider'; // 👈 importa o hook
 
 function Header({ handleScrollToSection }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { appearance, toggleTheme } = useTheme(); // 👈 acesso ao tema atual
 
   const toggleMobileMenu = () => setMenuOpen(!menuOpen);
 
   const handleNavClick = (sectionId) => {
     handleScrollToSection(sectionId);
-    setMenuOpen(false); // fecha menu mobile ao clicar
+    setMenuOpen(false);
   };
 
   return (
@@ -39,10 +41,25 @@ function Header({ handleScrollToSection }) {
                 Login
               </button>
             </li>
+
+            {/* Botão de tema */}
+            <li>
+              <button
+                className="nav-button"
+                onClick={toggleTheme}
+                title="Alternar tema"
+              >
+                {appearance === 'light' ? (
+                  <i className="fas fa-moon"></i>
+                ) : (
+                  <i className="fas fa-sun"></i>
+                )}
+              </button>
+            </li>
           </ul>
         </nav>
 
-        {/* Botão mobile */}
+        {/* Menu mobile */}
         <div className="mobile-menu" onClick={toggleMobileMenu}>
           <i className={`fas ${menuOpen ? 'fa-times' : 'fa-bars'}`}></i>
         </div>

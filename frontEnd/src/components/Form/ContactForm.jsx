@@ -1,7 +1,5 @@
 import { useState } from 'react';
 import { sendForm } from '../../utils/functionsReUsed';
-import './FormBase.css';
-
 function ContactForm() {
   const [formData, setFormData] = useState({
     user_name: '',

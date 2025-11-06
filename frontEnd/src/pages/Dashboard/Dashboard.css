@@ -392,10 +392,6 @@ input:checked + .slider:before {
 }
 
 
-.section-title i {
-  font-size: 1.6rem;
-  color: #007bff;
-}
 
 /* Adicionar Item - Form com Labels Flutuantes */
 .add-item-section {
