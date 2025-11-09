@@ -1,30 +1,111 @@
-import React from "react";
-import Card from "../../components/render/Card";
+// src/pages/Dashboard/Dashboard2.jsx
+import { Box, Typography, Grid, Card, CardContent, CircularProgress } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 
-export default function Dashboard() {
+// Definindo os estilos com makeStyles
+const useStyles = makeStyles((theme) => ({
+  container: {
+    padding: theme.spacing(3),
+    backgroundColor: '#f5f5f5',
+    height: '100vh',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  header: {
+    marginBottom: theme.spacing(2),
+    fontWeight: 'bold',
+    color: theme.palette.primary.main,
+    textAlign: 'center',
+  },
+  gridContainer: {
+    marginTop: theme.spacing(3),
+  },
+  card: {
+    minWidth: 250,
+    margin: theme.spacing(2),
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+  },
+  status: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: theme.spacing(2),
+  },
+  progress: {
+    marginRight: theme.spacing(2),
+  },
+  bodyText: {
+    marginTop: theme.spacing(3),
+    textAlign: 'center',
+    fontSize: '1.1rem',
+    color: '#555',
+  },
+}));
+
+// Componente Dashboard2
+function Dashboard2() {
+  const classes = useStyles(); // Usando os estilos definidos com makeStyles
+  
+  const data = {
+    computerName: "COM-0006",
+    status: "Offline",
+    antivirusStatus: "Enabled",
+  };
+
   return (
-    <div className="flex flex-wrap gap-6 justify-center p-6 bg-gray-100 min-h-screen">
-      <Card
-        title="Women Blouse"
-        description="Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris."
-        price="125"
-        image="https://images.unsplash.com/photo-1541099649105-f69ad21f3246"
-        colors={['#e91e63', '#ffc107', '#021a40']}
-      />
-      <Card
-        title="Children Shirt"
-        description="Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris."
-        price="45"
-        image="https://images.unsplash.com/photo-1530845649043-1f016d7e3b64"
-        colors={['#6c63ff', '#021a40']}
-      />
-      <Card
-        title="Men Flanel"
-        description="Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris."
-        price="75"
-        image="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f"
-        colors={['#2196f3', '#cfd8dc', '#021a40']}
-      />
-    </div>
+    <Box className={classes.container}>
+      {/* Cabeçalho */}
+      <Typography variant="h4" className={classes.header}>
+        Visibilidade Completa do seu Ecosistema de TI - Dashboard 2
+      </Typography>
+      
+      {/* Cards de informações */}
+      <Grid container spacing={3} className={classes.gridContainer}>
+        <Grid item xs={12} sm={6} md={3}>
+          <Card className={classes.card}>
+            <CardContent>
+              <Typography variant="h6">Status da Conectividade</Typography>
+              <Box className={classes.status}>
+                <CircularProgress className={classes.progress} size={24} color="secondary" />
+                <Typography>{data.status}</Typography>
+              </Box>
+            </CardContent>
+          </Card>
+        </Grid>
+
+        <Grid item xs={12} sm={6} md={3}>
+          <Card className={classes.card}>
+            <CardContent>
+              <Typography variant="h6">Antivírus</Typography>
+              <Box className={classes.status}>
+                <Typography>{data.antivirusStatus}</Typography>
+              </Box>
+            </CardContent>
+          </Card>
+        </Grid>
+
+        <Grid item xs={12} sm={6} md={3}>
+          <Card className={classes.card}>
+            <CardContent>
+              <Typography variant="h6">Informações do Computador</Typography>
+              <Box className={classes.status}>
+                <Typography>{data.computerName}</Typography>
+              </Box>
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
+
+      {/* Texto adicional para a segunda dashboard */}
+      <Typography variant="body1" className={classes.bodyText}>
+        Este é o conteúdo da segunda dashboard. Você pode personalizar mais elementos aqui.
+      </Typography>
+    </Box>
   );
 }
+
+export default Dashboard2;
