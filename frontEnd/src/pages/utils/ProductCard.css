@@ -1,0 +1,182 @@
+/* src/components/ProductCard.css */
+
+.product-card {
+  display: flex;
+  flex-direction: column; 
+  border: 1px solid #eee;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer; 
+  
+  /* * ALTURA FIXA TOTAL DO CARD 
+   * Esta é a garantia de que ele será "imóvel".
+   * 9rem (imagem) + 11rem (info) = 20rem (aprox. 320px)
+   * Ajuste este valor total se desejar.
+  */
+  height: 22rem; 
+}
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+.product-card.selected {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+/* ... (Controles .product-card-controls permanecem iguais) ... */
+.product-card-controls {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 10;
+  display: flex;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(4px);
+  padding: 0.35rem;
+  border-radius: 6px;
+  cursor: default;
+}
+.product-card-controls input[type="checkbox"] {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+}
+.product-card-controls button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.product-card-controls button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.product-card-controls .delete-btn:hover {
+  background-color: #ffebee;
+  color: #d32f2f;
+}
+
+/* Imagem (Altura Menor) */
+.product-card-image {
+  width: 100%;
+  height: 9rem; 
+  background-color: #f8f8f8;
+  flex-shrink: 0; /* Impede que a imagem encolha */
+}
+.product-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.product-card-image .image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Informações */
+.product-card-info {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  /* * Ocupa o espaço restante da altura fixa de 20rem
+   * (20rem - 9rem da imagem = 11rem)
+  */
+  flex-grow: 1; 
+  min-height: 0; /* Necessário para flexbox em overflow */
+}
+.product-card-info h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 0; /* Impede que o título encolha */
+}
+
+/* --- A CORREÇÃO DAS RETICÊNCIAS --- */
+.product-card-info p {
+  margin: 0 0 1rem 0;
+  font-size: 0.9rem;
+  color: #777;
+  line-height: 1.4; /* Altura da linha definida */
+  
+  /* Removemos o flex-grow e min-height daqui */
+
+  /* Propriedades de Reticências (Múltiplas Linhas) */
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Limita a 2 linhas */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
+  /* Definimos uma altura máxima baseada na altura da linha (1.4 * 2) 
+     Isso força o corte.
+  */
+  max-height: 2.8em; 
+}
+
+/* Rodapé do Card */
+.product-card-footer {
+  display: flex;
+  flex-direction: column; 
+  
+  /* * Ocupa a largura total e alinha os itens à esquerda por padrão */
+  align-items: flex-start; 
+  
+  border-top: 1px solid #f0f0f0;
+  padding-top: 0.75rem;
+  gap: 0.5rem; 
+  flex-shrink: 0;
+}
+
+.product-card-footer .price {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #0056b3;
+  
+  /* Mantém para que a cifra R$ não quebre */
+  white-space: nowrap; 
+  
+  /* Alinhamento no centro (usado para o bloco inteiro) */
+  margin: 0 auto; 
+  display: block; 
+  
+  /* Centraliza o texto dentro do bloco de 100% */
+  text-align: center; 
+  
+  /* * NOVO: Garante o corte lateral e as reticências */
+  width: 100%; 
+
+  /* * Aplicamos o corte */
+  overflow: hidden; 
+  text-overflow: clip; 
+}
+
+.product-card-footer .stock {
+  font-size: 0.85rem; 
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  background-color: #f4f4f4;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  flex-shrink: 0; 
+  
+  /* * NOVO: Empurra o elemento .stock para o lado direito */
+  margin-left: auto; 
+}

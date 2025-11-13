@@ -1,0 +1,68 @@
+/* src/components/HomeAdd.css */
+
+.home-add-container {
+  padding: 1rem;
+  max-width: 1200px; 
+  margin: auto;
+}
+
+/* ... (seções .add-section e .bulk-actions sem mudanças) ... */
+.add-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.add-button {
+  background-color: var(--accent-9);
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.bulk-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+.bulk-actions button {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.delete-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.delete-button:disabled {
+  background-color: #ccc;
+}
+
+
+/* --- O GRID RESPONSIVO ESTREITO --- */
+.itens-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  
+  /* * Usando 9.5rem (aprox 152px) como base mínima, 
+   * conforme sua sugestão de 150px.
+  */
+  grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
+  
+  gap: 1.5rem;
+}

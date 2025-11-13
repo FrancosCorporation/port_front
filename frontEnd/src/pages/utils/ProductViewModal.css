@@ -1,0 +1,125 @@
+/* src/components/ProductViewModal.css */
+
+.view-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8); /* Fundo preto mais escuro */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000; /* Acima do modal de edição */
+}
+
+.view-modal-card {
+  background-color: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 600px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  max-height: 90vh;
+  /* Impede o conteúdo de vazar */
+  display: flex;
+  flex-direction: column;
+}
+
+.view-modal-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #f0f0f0;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+.view-modal-close-button:hover {
+  background: #e0e0e0;
+}
+
+/* 1. Imagem */
+.view-modal-image {
+  width: 100%;
+  height: 300px; /* Imagem grande no topo */
+  background-color: #f1f1f1;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+}
+.view-modal-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.view-image-placeholder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: #ccc;
+}
+.view-image-placeholder span {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+}
+
+/* 2. Conteúdo */
+.view-modal-content {
+  padding: 1.5rem 2rem;
+  overflow-y: auto; /* Permite rolagem se a descrição for longa */
+}
+.view-modal-content h3 {
+  font-size: 2rem; /* Nome bem grande */
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.view-modal-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+.view-price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #004a9e;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.view-stock {
+  font-size: 1rem;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.view-modal-description label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #555;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.view-modal-description p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #333;
+  /* Garante que o texto quebre e não use reticências */
+  white-space: normal; 
+  word-break: break-word;
+}

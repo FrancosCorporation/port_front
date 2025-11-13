@@ -1,0 +1,165 @@
+/* src/components/ProductModal.css */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75); /* O fundo preto */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-card {
+  background-color: white;
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px; /* Largura máxima do card/modal */
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  /* Impede que o modal fique muito grande em telas pequenas */
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #f0f0f0;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal-close-button:hover {
+  background: #e0e0e0;
+}
+
+.modal-card h3 {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+/* --- Estilos do Formulário (Inspirado no Card) --- */
+
+.form-group {
+  margin-bottom: 1rem;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: #555;
+}
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box; /* Garante que o padding não estoure a largura */
+}
+
+/* Imagem */
+.form-image-preview {
+  width: 100%;
+  height: 200px;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #f9f9f9;
+  border: 1px dashed #ccc;
+  margin-bottom: 0.5rem;
+}
+.form-image-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.image-placeholder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: #ccc;
+}
+
+/* Nome (Maior) */
+.input-nome {
+  font-size: 1.25rem; /* Fonte maior para o nome */
+  font-weight: bold;
+}
+
+/* Descrição (Menor) */
+.input-descricao {
+  font-size: 0.9rem; /* Fonte menor para descrição */
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* Linha de Preço e Estoque */
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+.form-row .form-group {
+  flex: 1; /* Ocupa metade do espaço */
+}
+
+.input-with-icon {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 0 0.75rem;
+}
+.input-with-icon svg {
+  color: #888;
+  margin-right: 0.5rem;
+}
+.input-with-icon input {
+  border: none;
+  padding: 0.75rem 0; /* Remove padding duplicado */
+}
+/* Remove bordas/foco do input interno */
+.input-with-icon input:focus,
+.input-with-icon input:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Botão Salvar (Estilo "Adicionar ao Carrinho") */
+.modal-save-button {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: white;
+  background-color: #004a9e; /* Azul escuro do card */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+.modal-save-button:hover {
+  background-color: #003b7d;
+}
+.currency-symbol{
+  padding-right: 0.3rem;
+}
