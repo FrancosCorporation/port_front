@@ -8,8 +8,8 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import './styles/index.css';
 
 import Home from './pages/Home/Home';
-import Login from './components/Auth/Login';
-import Register from './components/Auth/Register';
+import Login from './components/services/userLogin';
+import Register from './components/services/userRegister';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Dashboard3 from './pages/Dashboard/Dashboard3';
 

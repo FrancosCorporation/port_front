@@ -1,0 +1,439 @@
+/*
+ * ARQUIVO UNIFICADO E CORRIGIDO: ProductStyles.css
+ * Contém estilos do ProductCard, ProductModal e ProductViewModal.
+ */
+
+
+/* ========================================
+ 1. ESTILOS DO PRODUCT-CARD
+========================================
+*/
+.product-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  height: 22rem;
+}
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+.product-card.selected {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+}
+
+.product-card-controls {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 10;
+  display: flex;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(4px);
+  padding: 0.35rem;
+  border-radius: 6px;
+  cursor: default;
+}
+.product-card-controls input[type="checkbox"] {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+}
+.product-card-controls button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.product-card-controls button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.product-card-controls .delete-btn:hover {
+  background-color: #ffebee;
+  color: #d32f2f;
+}
+
+.product-card-image {
+  width: 100%;
+  height: 9rem;
+  background-color: #f8f8f8;
+  flex-shrink: 0;
+}
+.product-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.product-card-image .image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-card-info {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-height: 0;
+}
+.product-card-info h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 0;
+}
+
+.product-card-info p {
+  margin: 0 0 1rem 0;
+  font-size: 0.9rem;
+  color: #777;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 2.8em;
+}
+
+.product-card-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-top: 1px solid #f0f0f0;
+  padding-top: 0.75rem;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.product-card-footer .price {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #0056b3;
+  white-space: nowrap;
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: clip;
+}
+
+.product-card-footer .stock {
+  font-size: 0.85rem;
+  color: #666;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  background-color: #f4f4f4;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+
+/* ========================================
+ 2. ESTILOS DO PRODUCT-MODAL (EDIT/CREATE)
+========================================
+*/
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-card {
+  background-color: white;
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #f0f0f0;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal-close-button:hover {
+  background: #e0e0e0;
+}
+
+.modal-card h3 {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.modal-card .form-group {
+  margin-bottom: 1rem;
+}
+.modal-card .form-group label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: #555;
+}
+.modal-card .form-group input,
+.modal-card .form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.modal-card .form-image-preview {
+  width: 100%;
+  height: 200px;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #f9f9f9;
+  border: 1px dashed #ccc;
+  margin-bottom: 0.5rem;
+}
+.modal-card .form-image-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* Estilo Escopado Corrigido para evitar colisão */
+.modal-card .image-placeholder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: #ccc;
+}
+
+.modal-card .input-nome {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.modal-card .input-descricao {
+  font-size: 0.9rem;
+  min-height: 80px;
+  resize: vertical;
+}
+
+.modal-card .form-row {
+  display: flex;
+  gap: 1rem;
+}
+.modal-card .form-row .form-group {
+  flex: 1;
+}
+
+.modal-card .input-with-icon {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 0 0.75rem;
+}
+.modal-card .input-with-icon svg {
+  color: #888;
+  margin-right: 0.5rem;
+}
+.modal-card .input-with-icon input {
+  border: none;
+  padding: 0.75rem 0;
+}
+.modal-card .input-with-icon input:focus,
+.modal-card .input-with-icon input:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.modal-card .modal-save-button {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: white;
+  background-color: #004a9e;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+.modal-card .modal-save-button:hover {
+  background-color: #003b7d;
+}
+.modal-card .currency-symbol{
+  padding-right: 0.3rem;
+}
+
+
+/* ========================================
+ 3. ESTILOS DO PRODUCT-VIEW-MODAL
+========================================
+*/
+.view-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.view-modal-card {
+  background-color: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 600px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.view-modal-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #f0f0f0; 
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+.view-modal-close-button:hover {
+  background: #e0e0e0;
+}
+
+.view-modal-image {
+  width: 100%;
+  height: 300px;
+  background-color: #f1f1f1;
+  border-radius: 12px 12px 0 0;
+  overflow: hidden;
+}
+.view-modal-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.view-image-placeholder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: #ccc;
+}
+.view-image-placeholder span {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+}
+
+.view-modal-content {
+  padding: 1.5rem 2rem;
+  overflow-y: auto;
+}
+.view-modal-content h3 {
+  font-size: 2rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.view-modal-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+.view-price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #004a9e;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.view-stock {
+  font-size: 1rem;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.view-modal-description label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #555;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.view-modal-description p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #333;
+  white-space: normal;
+  word-break: break-word;
+}

@@ -1,9 +1,11 @@
 // src/components/HomeAdd.jsx
 import { useState, useEffect } from "react";
 import { Plus, Trash2 } from "lucide-react";
-import ProductModal from "./ProductModal";
-import ProductCard from "./ProductCard";
-import ProductViewModal from "./ProductViewModal"; // 1. Importar o ViewModal
+import { 
+  ProductCard, 
+  ProductModal, 
+  ProductViewModal 
+} from './ProductComponents'; // 1. Importar o ViewModal
 import "./HomeAdd.css";
 
 export default function HomeAdd() {

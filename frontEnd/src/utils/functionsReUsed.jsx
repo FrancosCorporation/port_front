@@ -1,3 +1,4 @@
+//functionsReused.jsx
 export async function sendForm({ url, method = 'POST', body }) {
   const urlWord = process.env.REACT_APP_URL;
 

@@ -6,7 +6,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const path = require('path');
 const connectDB = require('./config/db');
-const userRoutes = require('./routes/userRoutes');
+const Routes = require('./routes/Routes');
 const cookieParser = require("cookie-parser");
 dotenv.config();
 connectDB();
@@ -29,7 +29,7 @@ const options = {
 app.use(express.json());
 app.use(cookieParser()); 
 // Rotas da API
-app.use('/api', userRoutes);
+app.use('/api', Routes);
 
 
 // Servir arquivos estáticos da pasta public

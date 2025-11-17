@@ -68,68 +68,68 @@ const userController = {
   },
 
   loginUser: async (req, res) => {
-  try {
-    // ✅ 1. Verifica corpo da requisição
-    if (!req.body || Object.keys(req.body).length === 0) {
-      return res.status(400).json({ message: "Corpo da requisição vazio (Missing Body)" });
-    }
+    try {
+      // ✅ 1. Verifica corpo da requisição
+      if (!req.body || Object.keys(req.body).length === 0) {
+        return res.status(400).json({ message: "Corpo da requisição vazio (Missing Body)" });
+      }
 
-    const { email, password } = req.body || {};
+      const { email, password } = req.body || {};
 
-    // ✅ 2. Verifica campos obrigatórios
-    const missingFields = [];
-    if (!email || email.trim() === "") missingFields.push("email");
-    if (!password || password.trim() === "") missingFields.push("password");
+      // ✅ 2. Verifica campos obrigatórios
+      const missingFields = [];
+      if (!email || email.trim() === "") missingFields.push("email");
+      if (!password || password.trim() === "") missingFields.push("password");
 
-    if (missingFields.length > 0) {
-      return res.status(400).json({
-        message: `Campos obrigatórios ausentes: ${missingFields.join(", ")}`,
+      if (missingFields.length > 0) {
+        return res.status(400).json({
+          message: `Campos obrigatórios ausentes: ${missingFields.join(", ")}`,
+        });
+      }
+
+      // ✅ 3. Valida formato de email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        return res.status(400).json({ message: "Email inválido" });
+      }
+
+      // ✅ 4. Procura usuário
+      const user = await User.findOne({ email: email.trim().toLowerCase() });
+      const isPasswordValid = await bcrypt.compare(password, user.password);
+      if (!user || !isPasswordValid) {
+        return res.status(400).json({ message: "Email ou senha incorretos" });
+      }
+
+      // ✅ 6. Cria token JWT
+      const token = jwt.sign(
+        { id: user._id, email: user.email },
+        process.env.JWT_SECRET,
+        { expiresIn: "1h" }
+      );
+
+      // ✅ Define o token em um cookie seguro
+      res.cookie("jwt", token, {
+        httpOnly: true, // não acessível via JS (protege contra XSS)
+        secure: process.env.NODE_ENV === "production", // só HTTPS em prod
+        sameSite: "lax", // evita CSRF simples
+        maxAge: 60 * 60 * 1000, // 1h
       });
+
+      // ✅ 7. Retorna dados do usuário + token
+      res.status(200).json({
+        message: "Login realizado com sucesso",
+        user: {
+          id: user._id,
+          name: user.name,
+          email: user.email,
+        },
+        token,
+      });
+    } catch (error) {
+      console.error("❌ Erro ao fazer login:", error);
+      res.status(500).json({ message: "Erro interno ao fazer login", error: error.message });
     }
-
-    // ✅ 3. Valida formato de email
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return res.status(400).json({ message: "Email inválido" });
-    }
-
-    // ✅ 4. Procura usuário
-    const user = await User.findOne({ email: email.trim().toLowerCase() });
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!user || !isPasswordValid) {
-      return res.status(400).json({ message: "Email ou senha incorretos" });
-    }
-
-    // ✅ 6. Cria token JWT
-    const token = jwt.sign(
-      { id: user._id, email: user.email },
-      process.env.JWT_SECRET,
-      { expiresIn: "1h" }
-    );
-
-    // ✅ Define o token em um cookie seguro
-    res.cookie("jwt", token, {
-      httpOnly: true, // não acessível via JS (protege contra XSS)
-      secure: process.env.NODE_ENV === "production", // só HTTPS em prod
-      sameSite: "lax", // evita CSRF simples
-      maxAge: 60 * 60 * 1000, // 1h
-    });
-
-    // ✅ 7. Retorna dados do usuário + token
-    res.status(200).json({
-      message: "Login realizado com sucesso",
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-      },
-      token,
-    });
-  } catch (error) {
-    console.error("❌ Erro ao fazer login:", error);
-    res.status(500).json({ message: "Erro interno ao fazer login", error: error.message });
-  }
-},
+  },
 
 
   getAllUsers: async (req, res) => {
@@ -149,6 +149,24 @@ const userController = {
       });
     } catch (error) {
       res.status(500).json({ message: 'Erro ao buscar usuários', error: error.message });
+    }
+  },
+  getProfile: async (req, res) => {
+    try {
+      const user = await User.findById(req.user.id).select("-password");
+
+      if (!user) {
+        return res.status(404).json({ message: "Usuário não encontrado." });
+      }
+
+      res.status(200).json({
+        message: "Dados do perfil do usuário autenticado",
+        user: user,
+      });
+
+    } catch (error) {
+      console.error("❌ Erro ao buscar perfil:", error);
+      res.status(500).json({ message: "Erro interno do servidor." });
     }
   },
 };
