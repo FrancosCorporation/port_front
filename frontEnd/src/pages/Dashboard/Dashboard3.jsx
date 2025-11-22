@@ -1,3 +1,4 @@
+//dashboard3.jsx
 import { useState } from "react";
 import { menuConfig as initialMenuConfig } from "../../lib/menuConfig";
 import { CircleUser } from "lucide-react";

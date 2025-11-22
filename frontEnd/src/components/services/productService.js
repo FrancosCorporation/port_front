@@ -1,43 +1,45 @@
 import { sendForm } from '../../utils/functionsReUsed';
 
 /**
- * Mapeia os dados do frontend (nome em português) para o backend (nome em inglês/Mongoose).
- * @param {object} formData - Dados do modal (nome, preco, fotoUrl, etc.)
- * @returns {object} Dados prontos para a API.
+ * Converte os dados do frontend para o formato do backend
+ * Garantindo que price e stock sejam números válidos
  */
 function mapFrontendToBackend(formData) {
-    const rawPrice = formData.preco.replace(/\./g, "").replace(/,/g, ".");
-    
-    return {
-        name: formData.nome,
-        description: formData.descricao,
-        price: Number(rawPrice) || 0,
-        stock: Number(formData.estoque) || 0,
-        image: formData.fotoUrl,
-        // O user: userId é injetado automaticamente pelo middleware no servidor.
-    };
+  const precoStr = formData.price ? formData.price.toString() : "0"; // usa price
+  const rawPrice = precoStr.replace(/\./g, "").replace(/,/g, ".");
+  
+  return {
+    name: formData.name || "Sem nome",
+    description: formData.description || "Sem descrição",
+    price: Number(rawPrice) || 0,
+    stock: Number(formData.stock) || 0,
+    image: formData.image ,
+  };
 }
 
-/**
- * Chama a API para criar um novo produto.
- * @param {object} formData - Dados do formulário do produto.
- * @returns {Promise<object>} O novo produto retornado pelo servidor.
- */
+/** Cria um produto */
 export async function createProduct(formData) {
-    try {
-        const productData = mapFrontendToBackend(formData);
-        
-        const result = await sendForm({ 
-            url: 'api/products', 
-            method: 'POST', 
-            body: productData 
-        });
-        
-        return result.product;
-    } catch (error) {
-        // A função sendForm já lança o erro com a mensagem da API
-        throw error;
-    }
+  const productData = mapFrontendToBackend(formData);
+  const result = await sendForm({ url: 'api/products', method: 'POST', body: productData });
+  return result.product;
 }
 
-// [Opcional: Adicione aqui as funções updateProduct, fetchProducts, deleteProduct]
+/** Atualiza um produto */
+export async function updateProduct(id, formData) {
+  const productData = mapFrontendToBackend(formData);
+  const result = await sendForm({ url: `api/products/${id}`, method: 'PUT', body: productData });
+  return result.product;
+}
+
+/** Deleta um produto */
+export async function deleteProduct(id) {
+  const result = await sendForm({ url: `api/products/${id}`, method: 'DELETE' });
+  return result;
+}
+
+/** Busca todos os produtos */
+export async function getProducts() {
+   const result = await sendForm({ url: 'api/products', method: 'GET' });
+  // Se o backend retornar { products: [...] } use result.products, caso contrário result
+  return result.products || result;
+}

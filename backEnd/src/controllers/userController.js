@@ -44,7 +44,7 @@ const userController = {
 
       // ✅ 6. Gera o hash da senha
       const hashedPassword = await bcrypt.hash(password, 10);
-      
+
 
       // ✅ 7. Cria o usuário
       const user = await User.create({
@@ -110,12 +110,11 @@ const userController = {
 
       // ✅ Define o token em um cookie seguro
       res.cookie("jwt", token, {
-        httpOnly: true, // não acessível via JS (protege contra XSS)
-        secure: process.env.NODE_ENV === "production", // só HTTPS em prod
-        sameSite: "lax", // evita CSRF simples
-        maxAge: 60 * 60 * 1000, // 1h
+        httpOnly: true,
+        secure: true, // precisa ser true porque sameSite: "none"
+        sameSite: "none", // para cross-origin
+        maxAge: 10 * 24 * 60 * 60 * 1000, // 10 dias, só para teste
       });
-
       // ✅ 7. Retorna dados do usuário + token
       res.status(200).json({
         message: "Login realizado com sucesso",

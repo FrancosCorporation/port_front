@@ -1,0 +1,502 @@
+[
+    {
+        "name": "Lamborghini Aventador SVJ",
+        "description": "O ápice dos V12 da Lamborghini. Performance extrema e design agressivo. Apenas 900 unidades.",
+        "price": 8500000,
+        "stock": 1,
+        "image": "https://i.imgur.com/GZ0QJ0f.jpeg"
+    },
+    {
+        "name": "Ferrari SF90 Stradale",
+        "description": "O primeiro híbrido plug-in da Ferrari. V8 turbo com 1000 cv combinados. Performance de outro mundo.",
+        "price": 7200000,
+        "stock": 2,
+        "image": "https://images.pexels.com/photos/17215160/pexels-photo-17215160/free-photo-of-ferrari-sf90-stradale.jpeg"
+    },
+    {
+        "name": "Bugatti Chiron Super Sport 300+",
+        "description": "Hiperesportivo que quebrou a barreira das 300 mph (480 km/h). Edição limitada e lendária.",
+        "price": 35000000,
+        "stock": 0,
+        "image": "https://images.pexels.com/photos/10143891/pexels-photo-10143891.jpeg"
+    },
+    {
+        "name": "Porsche 911 GT3 RS (992)",
+        "description": "Focado em pista, com aerodinâmica radical. Máquina de precisão alemã e motor aspirado.",
+        "price": 2500000,
+        "stock": 3,
+        "image": "https://images.pexels.com/photos/17937920/pexels-photo-17937920/free-photo-of-porsche-911-gt3-rs.jpeg"
+    },
+    {
+        "name": "Rolls-Royce Phantom VIII",
+        "description": "O auge do luxo automotivo. Extremamente silencioso e com interior feito sob medida.",
+        "price": 6800000,
+        "stock": 1,
+        "image": "https://images.pexels.com/photos/17565432/pexels-photo-17565432/free-photo-of-rolls-royce-preta.jpeg"
+    },
+    {
+        "name": "McLaren 765LT Spider",
+        "description": "Versão Longtail conversível, mais leve e potente. Extrema performance para a rua e pista.",
+        "price": 4800000,
+        "stock": 2,
+        "image": "https://images.pexels.com/photos/17855217/pexels-photo-17855217/free-photo-of-mclaren-765lt-spider.jpeg"
+    },
+    {
+        "name": "Aston Martin Valkyrie",
+        "description": "Hipercarro de Fórmula 1 para as ruas. Motor V12 aspirado puro e design futurista.",
+        "price": 28000000,
+        "stock": 0,
+        "image": "https://i.imgur.com/R0yB2pY.jpeg"
+    },
+    {
+        "name": "Mercedes-AMG ONE",
+        "description": "Tecnologia híbrida de F1 em um carro de rua. Um dos carros mais complexos e exclusivos.",
+        "price": 25000000,
+        "stock": 0,
+        "image": "https://images.pexels.com/photos/17498425/pexels-photo-17498425/free-photo-of-mercedes-amg-one.jpeg"
+    },
+    {
+        "name": "Bentley Continental GT Speed",
+        "description": "Luxo supremo e um motor W12 bi-turbo potente. O grand tourer perfeito para longas viagens.",
+        "price": 2300000,
+        "stock": 4,
+        "image": "https://images.pexels.com/photos/17208973/pexels-photo-17208973/free-photo-of-bentley-continental-gt-speed.jpeg"
+    },
+    {
+        "name": "Koenigsegg Jesko Absolut",
+        "description": "Hipercarro sueco focado em velocidade máxima. Projetado para atingir mais de 500 km/h.",
+        "price": 22000000,
+        "stock": 0,
+        "image": "https://i.imgur.com/Y0iB0zS.jpeg"
+    },
+    {
+        "name": "Bugatti Chiron Super Sport",
+        "description": "O hiperesportivo da Bugatti focado em velocidade máxima. Motor W16 quad-turbo de 1600 cv.",
+        "price": 38000000,
+        "stock": 1,
+        "image": "https://i.imgur.com/k9bT6Oq.jpeg"
+    },
+    {
+        "name": "Pagani Huayra R",
+        "description": "Versão de pista do Huayra, um monstro aspirado V12 feito à mão com obsessiva atenção aos detalhes.",
+        "price": 26000000,
+        "stock": 0,
+        "image": "https://i.imgur.com/z1hXgY8.jpeg"
+    },
+    {
+        "name": "Koenigsegg Regera",
+        "description": "Hipercarro híbrido sueco. Único sem caixa de câmbio tradicional, usando a tecnologia Koenigsegg Direct Drive.",
+        "price": 18000000,
+        "stock": 1,
+        "image": "https://i.imgur.com/97xYw5g.jpeg"
+    },
+    {
+        "name": "Ferrari LaFerrari Aperta",
+        "description": "Versão conversível e limitada do hipercarro híbrido LaFerrari. Uma das Ferraris mais desejadas.",
+        "price": 25000000,
+        "stock": 0,
+        "image": "https://i.imgur.com/QhWzE6i.jpeg"
+    },
+    {
+        "name": "Lamborghini Sián FKP 37 Roadster",
+        "description": "Primeiro híbrido da Lambo. Usa supercapacitores para potência extra. Design incrivelmente futurista.",
+        "price": 14000000,
+        "stock": 0,
+        "image": "https://i.imgur.com/V7G3b6o.jpeg"
+    },
+    {
+        "name": "McLaren P1 GTR",
+        "description": "Versão de pista pura do McLaren P1. Mais leve, mais potente e apenas para uso em circuito.",
+        "price": 12000000,
+        "stock": 0,
+        "image": "https://i.imgur.com/w2Y5L3i.jpeg"
+    },
+    {
+        "name": "Porsche 918 Spyder Weissach Package",
+        "description": "Hipercarro híbrido plug-in com pacote de redução de peso. Membro da 'Santa Trindade' de hiperesportivos.",
+        "price": 16000000,
+        "stock": 0,
+        "image": "https://i.imgur.com/HjL9ZtO.jpeg"
+    },
+    {
+        "name": "Aston Martin Valkyrie AMR Pro",
+        "description": "Versão extrema apenas para pista do Valkyrie, projetada com a tecnologia da Fórmula 1.",
+        "price": 30000000,
+        "stock": 0,
+        "image": "https://i.imgur.com/N5K9Y2R.jpeg"
+    },
+    {
+        "name": "Mercedes-AMG ONE",
+        "description": "O hipercarro que trouxe a tecnologia híbrida e o motor V6 turbo da F1 para as ruas.",
+        "price": 25000000,
+        "stock": 1,
+        "image": "https://i.imgur.com/1B9Z1Vn.jpeg"
+    },
+    {
+        "name": "Ford GT Heritage Edition",
+        "description": "Hipercarro americano moderno que celebra a vitória de 1966 em Le Mans. Performance V6 EcoBoost.",
+        "price": 6000000,
+        "stock": 2,
+        "image": "https://i.imgur.com/1G8G0Qp.jpeg"
+    },
+    {
+        "name": "Lamborghini Aventador SVJ Coupé",
+        "description": "O supercarro V12 que conquistou o Nürburgring. Desempenho aerodinâmico ativo (ALA).",
+        "price": 8500000,
+        "stock": 3,
+        "image": "https://i.imgur.com/GZ0QJ0f.jpeg"
+    },
+    {
+        "name": "Ferrari 488 Pista",
+        "description": "A versão mais leve e potente da 488. Focada em pista, com motor V8 premiado e aerodinâmica avançada.",
+        "price": 4200000,
+        "stock": 5,
+        "image": "https://i.imgur.com/lM8jD4Y.jpeg"
+    },
+    {
+        "name": "Audi R8 V10 Performance RWD",
+        "description": "O supercarro de motor V10 aspirado da Audi, agora apenas com tração traseira para mais diversão.",
+        "price": 1500000,
+        "stock": 8,
+        "image": "https://i.imgur.com/vH4v9Yt.jpeg"
+    },
+    {
+        "name": "McLaren 720S Coupé",
+        "description": "O supercarro britânico conhecido por sua usabilidade diária e desempenho brutal graças ao V8 twin-turbo.",
+        "price": 3500000,
+        "stock": 4,
+        "image": "https://i.imgur.com/8QG9sWl.jpeg"
+    },
+    {
+        "name": "Porsche 911 GT2 RS (991)",
+        "description": "O 911 mais extremo e potente da geração 991. Turbo, tração traseira e feito para recordes de pista.",
+        "price": 4000000,
+        "stock": 2,
+        "image": "https://i.imgur.com/5J3Pj3Y.jpeg"
+    },
+    {
+        "name": "Nissan GT-R Nismo Special Edition",
+        "description": "Godzilla na sua forma mais extrema. Engenharia japonesa de precisão e performance de supercarro.",
+        "price": 1700000,
+        "stock": 6,
+        "image": "https://i.imgur.com/yK5jW4O.jpeg"
+    },
+    {
+        "name": "Maserati MC20 Cielo",
+        "description": "A versão conversível 'Cielo' do supercarro MC20. Teto de vidro retrátil e motor 'Nettuno' V6.",
+        "price": 3200000,
+        "stock": 3,
+        "image": "https://i.imgur.com/Xk5x7wD.jpeg"
+    },
+    {
+        "name": "Lexus LFA Nürburgring Package",
+        "description": "Supercarro V10 raro. Pacote especial de pista. Reconhecido como um dos melhores sons automotivos.",
+        "price": 5000000,
+        "stock": 0,
+        "image": "https://i.imgur.com/5V8D7R0.jpeg"
+    },
+    {
+        "name": "Chevrolet Corvette Z06 (C8)",
+        "description": "O Corvette de motor central, na sua versão Z06 de alto desempenho com V8 aspirado plano.",
+        "price": 1800000,
+        "stock": 7,
+        "image": "https://i.imgur.com/yU4l2Zg.jpeg"
+    },
+    {
+        "name": "Aston Martin DBS Superleggera Volante",
+        "description": "Grand tourer V12 conversível. Combina desempenho feroz com o luxo e elegância britânica.",
+        "price": 3000000,
+        "stock": 4,
+        "image": "https://i.imgur.com/3K1o7mZ.jpeg"
+    },
+    {
+        "name": "Ferrari 812 Superfast",
+        "description": "Um dos últimos V12 aspirados de motor dianteiro da Ferrari. Potência pura e sonoridade inigualável.",
+        "price": 5500000,
+        "stock": 2,
+        "image": "https://i.imgur.com/3q1nQ4R.jpeg"
+    },
+    {
+        "name": "Lamborghini Huracán STO",
+        "description": "Super Trofeo Omologata. Versão de rua derivada diretamente das corridas da Lamborghini.",
+        "price": 3900000,
+        "stock": 5,
+        "image": "https://i.imgur.com/xT5aF3V.jpeg"
+    },
+    {
+        "name": "Mercedes-AMG GT R Black Series",
+        "description": "O mais radical AMG GT já construído. Focado em downforce, com aerodinâmica agressiva e V8 bi-turbo.",
+        "price": 6500000,
+        "stock": 1,
+        "image": "https://i.imgur.com/M5k2k0F.jpeg"
+    },
+    {
+        "name": "BMW M4 CSL",
+        "description": "Edição limitada do M4, com redução de peso (CSL) e foco em desempenho de pista.",
+        "price": 1400000,
+        "stock": 7,
+        "image": "https://i.imgur.com/P4E1G9s.jpeg"
+    },
+    {
+        "name": "Audi RS 7 Sportback Performance",
+        "description": "O sedã coupé de alta performance da Audi. Combina luxo, tecnologia e um motor V8 poderoso.",
+        "price": 1500000,
+        "stock": 6,
+        "image": "https://i.imgur.com/T0R0G8K.jpeg"
+    },
+    {
+        "name": "Jaguar F-Type SVR Coupé",
+        "description": "O F-Type mais potente e rápido, desenvolvido pela divisão Special Vehicle Operations (SVO).",
+        "price": 1100000,
+        "stock": 9,
+        "image": "https://i.imgur.com/4qD4N6s.jpeg"
+    },
+    {
+        "name": "Dodge Viper ACR Extreme Aero",
+        "description": "O carro americano focado em pista com o V10 mais puro e um pacote aerodinâmico massivo.",
+        "price": 1600000,
+        "stock": 3,
+        "image": "https://i.imgur.com/V9C3E3G.jpeg"
+    },
+    {
+        "name": "McLaren Senna",
+        "description": "Hipercarro extremo feito em homenagem a Ayrton Senna. Focado em ser o carro de rua mais rápido em circuito.",
+        "price": 10000000,
+        "stock": 0,
+        "image": "https://i.imgur.com/2P3V2Z0.jpeg"
+    },
+    {
+        "name": "Noble M600",
+        "description": "Supercarro britânico artesanal, focado na experiência analógica pura. Motor V8 biturbo.",
+        "price": 2500000,
+        "stock": 1,
+        "image": "https://i.imgur.com/wVbN4D8.jpeg"
+    },
+    {
+        "name": "Zenvo TSR-S",
+        "description": "Hipercarro dinamarquês conhecido por seu aerofólio ativo que se inclina, otimizando o downforce.",
+        "price": 9500000,
+        "stock": 0,
+        "image": "https://i.imgur.com/A6jM2Hk.jpeg"
+    },
+    {
+        "name": "Rimac Nevera",
+        "description": "Hipercarro elétrico croata. Detentor de vários recordes de velocidade e aceleração. Potência de 1914 cv.",
+        "price": 13000000,
+        "stock": 1,
+        "image": "https://i.imgur.com/K5bX8Gj.jpeg"
+    },
+    {
+        "name": "Pininfarina Battista",
+        "description": "Hiper GT elétrico italiano. Um dos carros mais potentes já feitos, com design Pininfarina puro.",
+        "price": 11000000,
+        "stock": 0,
+        "image": "https://i.imgur.com/bZ6W6Gg.jpeg"
+    },
+    {
+        "name": "Lotus Evija",
+        "description": "Primeiro hipercarro elétrico da Lotus. Ultra-leve e com foco total em aerodinâmica e downforce.",
+        "price": 19000000,
+        "stock": 0,
+        "image": "https://i.imgur.com/Y5E4t1o.jpeg"
+    },
+    {
+        "name": "Hennessey Venom F5",
+        "description": "Hipercarro americano. Projetado para atingir velocidades acima de 500 km/h com seu V8 'Fury'.",
+        "price": 8500000,
+        "stock": 1,
+        "image": "https://i.imgur.com/Qj0Vp3k.jpeg"
+    },
+    {
+        "name": "Acura NSX Type S",
+        "description": "A versão de despedida de alto desempenho do NSX híbrido. Performance, tecnologia e confiabilidade japonesa.",
+        "price": 1900000,
+        "stock": 4,
+        "image": "https://i.imgur.com/FwG2R0g.jpeg"
+    },
+    {
+        "name": "Audi TT RS Coupé",
+        "description": "Esportivo compacto com o aclamado motor cinco cilindros turbo. Excelente relação preço/desempenho.",
+        "price": 750000,
+        "stock": 10,
+        "image": "https://i.imgur.com/Y6sC3Hj.jpeg"
+    },
+    {
+        "name": "Porsche 718 Cayman GT4 RS",
+        "description": "O Cayman mais radical. Usa o motor aspirado 4.0L do 911 GT3. Focado em experiência de direção.",
+        "price": 1950000,
+        "stock": 5,
+        "image": "https://i.imgur.com/2Xy0UuR.jpeg"
+    },
+    {
+        "name": "Ferrari 296 GTB",
+        "description": "O novo supercarro híbrido V6 da Ferrari. Design elegante e desempenho impressionante. ",
+        "price": 4500000,
+        "stock": 3,
+        "image": "https://images.pexels.com/photos/17215160/pexels-photo-17215160/free-photo-of-ferrari-sf90-stradale.jpeg"
+    },
+    {
+        "name": "Lamborghini Huracán Evo",
+        "description": "A evolução do Huracán. Possui aerodinâmica aprimorada e um V10 aspirado emocionante.",
+        "price": 3000000,
+        "stock": 6,
+        "image": "https://images.pexels.com/photos/17565432/pexels-photo-17565432/free-photo-of-rolls-royce-preta.jpeg"
+    },
+    {
+        "name": "Mercedes-AMG GT Black Series P One Edition",
+        "description": "Uma edição especial do Black Series, exclusiva para proprietários do AMG ONE. Extremo.",
+        "price": 7000000,
+        "stock": 0,
+        "image": "https://images.pexels.com/photos/17937920/pexels-photo-17937920/free-photo-of-porsche-911-gt3-rs.jpeg"
+    },
+    {
+        "name": "Aston Martin Vantage F1 Edition",
+        "description": "Versão de alta performance inspirada no carro de segurança da Fórmula 1. Mais focado em pista.",
+        "price": 2200000,
+        "stock": 4,
+        "image": "https://images.pexels.com/photos/17855217/pexels-photo-17855217/free-photo-of-mclaren-765lt-spider.jpeg"
+    },
+    {
+        "name": "Bugatti Veyron Super Sport",
+        "description": "A versão mais rápida do Veyron, que deteve o recorde mundial de velocidade por anos. 1200 cv.",
+        "price": 17000000,
+        "stock": 0,
+        "image": "https://images.pexels.com/photos/10143891/pexels-photo-10143891.jpeg"
+    },
+    {
+        "name": "Pagani Zonda Cinque Roadster",
+        "description": "Extremamente raro, apenas 5 unidades. Um dos Zondas mais valiosos já construídos.",
+        "price": 19000000,
+        "stock": 0,
+        "image": "https://images.pexels.com/photos/17208973/pexels-photo-17208973/free-photo-of-bentley-continental-gt-speed.jpeg"
+    },
+    {
+        "name": "Koenigsegg Agera RS",
+        "description": "O hipercarro que quebrou cinco recordes mundiais de velocidade. V8 bi-turbo brutalmente potente.",
+        "price": 21000000,
+        "stock": 0,
+        "image": "https://i.imgur.com/X4J0G9d.jpeg"
+    },
+    {
+        "name": "Ferrari F50",
+        "description": "Sucessor espiritual da F40, com um V12 aspirado derivado da Fórmula 1. Extremamente raro.",
+        "price": 18000000,
+        "stock": 0,
+        "image": "https://i.imgur.com/K1L8R9d.jpeg"
+    },
+    {
+        "name": "McLaren Speedtail",
+        "description": "Hiper GT de três lugares. Sucessor espiritual do F1, focado em alta velocidade e luxo.",
+        "price": 15000000,
+        "stock": 0,
+        "image": "https://i.imgur.com/2Z7W9yM.jpeg"
+    },
+    {
+        "name": "Porsche 911 GT3 Touring (992)",
+        "description": "O 911 GT3 sem a asa traseira grande. Motor aspirado 4.0L com um visual mais discreto e elegante.",
+        "price": 1800000,
+        "stock": 5,
+        "image": "https://i.imgur.com/4QJ2H8z.jpeg"
+    },
+    {
+        "name": "Alpine A110 R",
+        "description": "Esportivo francês ultraleve. Focado em pureza e agilidade. Edição de pista do A110.",
+        "price": 850000,
+        "stock": 8,
+        "image": "https://i.imgur.com/yU4l2Zg.jpeg"
+    },
+    {
+        "name": "Dallara Stradale",
+        "description": "Carro esportivo italiano sem portas ou teto. Experiência de direção de carro de corrida.",
+        "price": 1300000,
+        "stock": 2,
+        "image": "https://i.imgur.com/QhWzE6i.jpeg"
+    },
+    {
+        "name": "BAC Mono R",
+        "description": "Carro de monoposto de rua. Leveza extrema e motor aspirado para o máximo de performance.",
+        "price": 1000000,
+        "stock": 1,
+        "image": "https://i.imgur.com/HjL9ZtO.jpeg"
+    },
+  { "name": "Bugatti Chiron Super Sport", "description": "O hiperesportivo da Bugatti focado em velocidade máxima. Motor W16 quad-turbo de 1600 cv.", "price": 38000000, "stock": 1, "image": "https://i.imgur.com/k9bT6Oq.jpeg" },
+  { "name": "Pagani Huayra R", "description": "Versão de pista do Huayra, um monstro aspirado V12 feito à mão com obsessiva atenção aos detalhes.", "price": 26000000, "stock": 0, "image": "https://i.imgur.com/z1hXgY8.jpeg" },
+  { "name": "Koenigsegg Regera", "description": "Hipercarro híbrido sueco. Único sem caixa de câmbio tradicional, usando a tecnologia Direct Drive.", "price": 18000000, "stock": 1, "image": "https://i.imgur.com/97xYw5g.jpeg" },
+  { "name": "Ferrari LaFerrari Aperta", "description": "Versão conversível e limitada do hipercarro híbrido. Uma das Ferraris mais desejadas da história.", "price": 25000000, "stock": 0, "image": "https://i.imgur.com/QhWzE6i.jpeg" },
+  { "name": "Lamborghini Sián FKP 37 Roadster", "description": "Primeiro híbrido da Lambo com supercapacitores. Tecnologia de ponta e design futurista.", "price": 14000000, "stock": 0, "image": "https://i.imgur.com/V7G3b6o.jpeg" },
+  { "name": "McLaren P1 GTR", "description": "Versão de pista pura do McLaren P1. Mais leve, mais potente e apenas para uso em circuito fechado.", "price": 12000000, "stock": 0, "image": "https://i.imgur.com/w2Y5L3i.jpeg" },
+  { "name": "Porsche 918 Spyder Weissach Package", "description": "Hipercarro híbrido plug-in da 'Santa Trindade'. Pacote de redução de peso para máximo desempenho.", "price": 16000000, "stock": 0, "image": "https://i.imgur.com/HjL9ZtO.jpeg" },
+  { "name": "Aston Martin Valkyrie AMR Pro", "description": "Versão extrema do Valkyrie, somente para pista. Tecnologia de Fórmula 1 nas mãos de civis.", "price": 30000000, "stock": 0, "image": "https://i.imgur.com/N5K9Y2R.jpeg" },
+  { "name": "Mercedes-AMG ONE", "description": "O hipercarro que trouxe a tecnologia híbrida e o motor V6 turbo da F1 para as ruas. Exclusivíssimo.", "price": 25000000, "stock": 1, "image": "https://i.imgur.com/1B9Z1Vn.jpeg" },
+  { "name": "Ford GT Heritage Edition", "description": "Hipercarro americano moderno que celebra a vitória de 1966 em Le Mans. V6 EcoBoost de alto rendimento.", "price": 6000000, "stock": 2, "image": "https://i.imgur.com/1G8G0Qp.jpeg" },
+  { "name": "Lamborghini Aventador SVJ Coupé", "description": "O supercarro V12 que conquistou o Nürburgring. Desempenho aerodinâmico ativo (ALA) de ponta.", "price": 8500000, "stock": 3, "image": "https://i.imgur.com/GZ0QJ0f.jpeg" },
+  { "name": "Ferrari 488 Pista", "description": "A versão mais leve e potente da 488, focada em pista. V8 premiado e aerodinâmica avançada.", "price": 4200000, "stock": 5, "image": "https://i.imgur.com/lM8jD4Y.jpeg" },
+  { "name": "Audi R8 V10 Performance RWD", "description": "Supercarro V10 aspirado da Audi, com tração traseira. Usabilidade diária e som visceral.", "price": 1500000, "stock": 8, "image": "https://i.imgur.com/vH4v9Yt.jpeg" },
+  { "name": "McLaren 720S Coupé", "description": "Supercarro britânico conhecido por seu desempenho brutal e construção ultraleve em fibra de carbono.", "price": 3500000, "stock": 4, "image": "https://i.imgur.com/8QG9sWl.jpeg" },
+  { "name": "Porsche 911 GT2 RS (991)", "description": "O 911 mais extremo e potente da geração 991. Turbo e tração traseira, feito para recordes.", "price": 4000000, "stock": 2, "image": "https://i.imgur.com/5J3Pj3Y.jpeg" },
+  { "name": "Nissan GT-R Nismo Special Edition", "description": "Godzilla na sua forma mais extrema. Engenharia japonesa de precisão e performance lendária.", "price": 1700000, "stock": 6, "image": "https://i.imgur.com/yK5jW4O.jpeg" },
+  { "name": "Maserati MC20 Cielo", "description": "Versão conversível do supercarro MC20. Teto de vidro retrátil e motor 'Nettuno' V6 potente.", "price": 3200000, "stock": 3, "image": "https://i.imgur.com/Xk5x7wD.jpeg" },
+  { "name": "Lexus LFA Nürburgring Package", "description": "Supercarro V10 raro, com motor Yamaha. Um dos melhores sons e carrocerias da história.", "price": 5000000, "stock": 0, "image": "https://i.imgur.com/5V8D7R0.jpeg" },
+  { "name": "Chevrolet Corvette Z06 (C8)", "description": "Corvette de motor central, versão Z06 de alto desempenho com V8 aspirado de virabrequim plano.", "price": 1800000, "stock": 7, "image": "https://i.imgur.com/yU4l2Zg.jpeg" },
+  { "name": "Aston Martin DBS Superleggera Volante", "description": "Grand tourer V12 conversível. Combina desempenho feroz com o luxo e a elegância britânica.", "price": 3000000, "stock": 4, "image": "https://i.imgur.com/3K1o7mZ.jpeg" },
+  { "name": "Ferrari 812 Superfast", "description": "Um dos últimos V12 aspirados de motor dianteiro da Ferrari. Potência e sonoridade incomparáveis.", "price": 5500000, "stock": 2, "image": "https://i.imgur.com/3q1nQ4R.jpeg" },
+  { "name": "Lamborghini Huracán STO", "description": "Super Trofeo Omologata. Versão de rua derivada das corridas da Lamborghini. Pura aerodinâmica.", "price": 3900000, "stock": 5, "image": "https://i.imgur.com/xT5aF3V.jpeg" },
+  { "name": "Mercedes-AMG GT R Black Series", "description": "O mais radical AMG GT já construído. Focado em downforce, com aerodinâmica e V8 bi-turbo.", "price": 6500000, "stock": 1, "image": "https://i.imgur.com/M5k2k0F.jpeg" },
+  { "name": "BMW M4 CSL", "description": "Edição limitada do M4 com redução de peso (CSL) e foco em desempenho de pista. Pura emoção.", "price": 1400000, "stock": 7, "image": "https://i.imgur.com/P4E1G9s.jpeg" },
+  { "name": "Audi RS 7 Sportback Performance", "description": "Sedã coupé de alta performance. Luxo, tecnologia e um motor V8 poderoso em um pacote familiar.", "price": 1500000, "stock": 6, "image": "https://i.imgur.com/T0R0G8K.jpeg" },
+  { "name": "Jaguar F-Type SVR Coupé", "description": "O F-Type mais potente e rápido. Desenvolvido pela divisão SVO, com V8 supercharged.", "price": 1100000, "stock": 9, "image": "https://i.imgur.com/4qD4N6s.jpeg" },
+  { "name": "Dodge Viper ACR Extreme Aero", "description": "O carro americano com V10 mais puro. Foco total em performance de pista com aerodinâmica massiva.", "price": 1600000, "stock": 3, "image": "https://i.imgur.com/V9C3E3G.jpeg" },
+  { "name": "McLaren Senna", "description": "Hipercarro extremo feito em homenagem a Ayrton Senna. O carro de rua mais rápido em circuito.", "price": 10000000, "stock": 0, "image": "https://i.imgur.com/2P3V2Z0.jpeg" },
+  { "name": "Noble M600", "description": "Supercarro britânico artesanal, focado na experiência analógica pura. V8 bi-turbo.", "price": 2500000, "stock": 1, "image": "https://i.imgur.com/wVbN4D8.jpeg" },
+  { "name": "Zenvo TSR-S", "description": "Hipercarro dinamarquês conhecido pelo aerofólio ativo que se inclina para otimizar o downforce.", "price": 9500000, "stock": 0, "image": "https://i.imgur.com/A6jM2Hk.jpeg" },
+  { "name": "Rimac Nevera", "description": "Hipercarro elétrico croata. Detentor de vários recordes de velocidade e aceleração. 1914 cv.", "price": 13000000, "stock": 1, "image": "https://i.imgur.com/K5bX8Gj.jpeg" },
+  { "name": "Pininfarina Battista", "description": "Hiper GT elétrico italiano. Um dos carros mais potentes já feitos, com design Pininfarina elegante.", "price": 11000000, "stock": 0, "image": "https://i.imgur.com/bZ6W6Gg.jpeg" },
+  { "name": "Lotus Evija", "description": "Primeiro hipercarro elétrico da Lotus. Ultra-leve, com foco total em aerodinâmica e performance.", "price": 19000000, "stock": 0, "image": "https://i.imgur.com/Y5E4t1o.jpeg" },
+  { "name": "Hennessey Venom F5", "description": "Hipercarro americano projetado para atingir velocidades acima de 500 km/h com seu V8 'Fury'.", "price": 8500000, "stock": 1, "image": "https://i.imgur.com/Qj0Vp3k.jpeg" },
+  { "name": "Acura NSX Type S", "description": "Versão de despedida de alto desempenho do NSX híbrido. Performance, tecnologia e confiabilidade.", "price": 1900000, "stock": 4, "image": "https://i.imgur.com/FwG2R0g.jpeg" },
+  { "name": "Audi TT RS Coupé", "description": "Esportivo compacto com o aclamado motor cinco cilindros turbo. Excelente relação preço/desempenho.", "price": 750000, "stock": 10, "image": "https://i.imgur.com/Y6sC3Hj.jpeg" },
+  { "name": "Porsche 718 Cayman GT4 RS", "description": "O Cayman mais radical. Usa o motor aspirado 4.0L do 911 GT3. Experiência de direção pura.", "price": 1950000, "stock": 5, "image": "https://i.imgur.com/2Xy0UuR.jpeg" },
+  { "name": "Ferrari 296 GTB", "description": "O novo supercarro híbrido V6 da Ferrari. Design elegante e desempenho impressionante.", "price": 4500000, "stock": 3, "image": "https://i.imgur.com/7S8l0Zg.jpeg" },
+  { "name": "Lamborghini Huracán Evo", "description": "A evolução do Huracán. Possui aerodinâmica aprimorada e um V10 aspirado emocionante.", "price": 3000000, "stock": 6, "image": "https://i.imgur.com/5J3Pj3Y.jpeg" },
+  { "name": "Mercedes-AMG GT Black Series P One Edition", "description": "Uma edição especial do Black Series, exclusiva para proprietários do AMG ONE.", "price": 7000000, "stock": 0, "image": "https://i.imgur.com/M5k2k0F.jpeg" },
+  { "name": "Aston Martin Vantage F1 Edition", "description": "Versão de alta performance inspirada no carro de segurança da Fórmula 1. Mais focado em pista.", "price": 2200000, "stock": 4, "image": "https://i.imgur.com/R0yB2pY.jpeg" },
+  { "name": "Bugatti Veyron Super Sport", "description": "A versão mais rápida do Veyron, que deteve o recorde mundial de velocidade por anos. 1200 cv.", "price": 17000000, "stock": 0, "image": "https://i.imgur.com/L7XmP1Q.jpeg" },
+  { "name": "Pagani Zonda Cinque Roadster", "description": "Extremamente raro, apenas 5 unidades. Um dos Zondas mais valiosos já construídos.", "price": 19000000, "stock": 0, "image": "https://i.imgur.com/z1hXgY8.jpeg" },
+  { "name": "Koenigsegg Agera RS", "description": "O hipercarro que quebrou cinco recordes mundiais de velocidade. V8 bi-turbo brutalmente potente.", "price": 21000000, "stock": 0, "image": "https://i.imgur.com/X4J0G9d.jpeg" },
+  { "name": "Ferrari F50", "description": "Sucessor espiritual da F40, com um V12 aspirado derivado da Fórmula 1. Extremamente raro.", "price": 18000000, "stock": 0, "image": "https://i.imgur.com/K1L8R9d.jpeg" },
+  { "name": "McLaren Speedtail", "description": "Hiper GT de três lugares. Sucessor espiritual do F1, focado em alta velocidade e luxo.", "price": 15000000, "stock": 0, "image": "https://i.imgur.com/2Z7W9yM.jpeg" },
+  { "name": "Porsche 911 GT3 Touring (992)", "description": "O 911 GT3 sem a asa traseira grande. Motor aspirado 4.0L com um visual mais discreto e elegante.", "price": 1800000, "stock": 5, "image": "https://i.imgur.com/4QJ2H8z.jpeg" },
+  { "name": "Alpine A110 R", "description": "Esportivo francês ultraleve. Focado em pureza e agilidade. Edição de pista do A110.", "price": 850000, "stock": 8, "image": "https://i.imgur.com/yU4l2Zg.jpeg" },
+  { "name": "Dallara Stradale", "description": "Carro esportivo italiano sem portas ou teto. Experiência de direção de carro de corrida.", "price": 1300000, "stock": 2, "image": "https://i.imgur.com/QhWzE6i.jpeg" },
+  { "name": "BAC Mono R", "description": "Carro de monoposto de rua. Leveza extrema e motor aspirado para o máximo de performance.", "price": 1000000, "stock": 1, "image": "https://i.imgur.com/HjL9ZtO.jpeg" }
+,{
+  "name": "Dallara Stradale",
+  "description": "Carro esportivo italiano sem portas ou teto, configuração barchetta, feita para pista e estrada.",
+  "price": 1300000,
+  "stock": 2,
+  "image": "https://upload.wikimedia.org/wikipedia/commons/5/57/2019_Dallara_Stradale_2.3_Rear.jpg"
+},
+{  "name": "BAC Mono R",
+  "description": "Carro de monoposto de rua. Leveza extrema e motor aspirado para o máximo de performance.",
+  "price": 1000000,
+  "stock": 1,
+  "image": "https://upload.wikimedia.org/wikipedia/commons/3/3e/BAC_Mono_R%2C_2019_%28cropped%29.jpg"
+},
+  { "name": "Bugatti Veyron", "description": "Supercarro francês de altíssima performance, motor W16 de 1001 cv.", "price": 1500000, "stock": 2, "image": "https://upload.wikimedia.org/wikipedia/commons/3/35/Bugatti_Veyron_16.4.JPG" },
+  { "name": "Lamborghini Miura LP400", "description": "Clássico italiano de 1967, referência em design esportivo.", "price": 1200000, "stock": 1, "image": "https://upload.wikimedia.org/wikipedia/commons/e/ed/Lamborghini_Miura_SV_1969_%281%29.jpg" },
+  { "name": "Ferrari 365 GTB/4 Daytona", "description": "Ícone italiano de 1969, esportivo de alto desempenho.", "price": 900000, "stock": 1, "image": "https://upload.wikimedia.org/wikipedia/commons/7/7f/Ferrari_365_GTB_4_Daytona.jpg" },
+  { "name": "McLaren F1", "description": "Britânico lendário, motor V12, considerado um dos melhores supercarros de todos os tempos.", "price": 2000000, "stock": 1, "image": "https://upload.wikimedia.org/wikipedia/commons/2/2f/McLaren_F1_V12.jpg" },
+  { "name": "Lamborghini Countach", "description": "Design futurista e agressivo, marco da década de 70.", "price": 1100000, "stock": 1, "image": "https://upload.wikimedia.org/wikipedia/commons/8/81/Lamborghini_Countach_LP500_S.jpg" },
+  { "name": "Mercedes-Benz 300SL", "description": "Clássico alemão com portas asa de gaivota, motor 6 cilindros.", "price": 950000, "stock": 1, "image": "https://upload.wikimedia.org/wikipedia/commons/0/0a/Mercedes-Benz_300SL_Roadster_-_Flickr_-_Alexandre_Pr%C3%A9vot.jpg" },
+  { "name": "Ferrari F40", "description": "Supercarro icônico dos anos 80, leve e potente.", "price": 1300000, "stock": 1, "image": "https://upload.wikimedia.org/wikipedia/commons/8/86/Ferrari_F40_%281986%29_02.JPG" },
+  { "name": "Porsche 959", "description": "Tecnologia avançada dos anos 80, tração integral e motor turbo.", "price": 1200000, "stock": 1, "image": "https://upload.wikimedia.org/wikipedia/commons/9/9e/Porsche_959_1986.jpg" },
+  { "name": "Ferrari 250 GTO", "description": "Superclássico dos anos 60, raridade absoluta.", "price": 30000000, "stock": 1, "image": "https://upload.wikimedia.org/wikipedia/commons/0/0b/Ferrari_250_GTO_1962.jpg" },
+  { "name": "Ford GT40", "description": "Lenda americana de corrida, vencedor de Le Mans.", "price": 1100000, "stock": 1, "image": "https://upload.wikimedia.org/wikipedia/commons/3/37/Ford_GT40.jpg" },
+  { "name": "Ferrari Enzo", "description": "Homenagem ao fundador, motor V12 e design extremo.", "price": 2200000, "stock": 1, "image": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Ferrari_Enzo_2002.jpg" },
+  { "name": "Duesenberg SJ", "description": "Clássico americano de luxo, motor potente para a época.", "price": 1800000, "stock": 1, "image": "https://upload.wikimedia.org/wikipedia/commons/5/50/Duesenberg_SJ.jpg" },
+  { "name": "Ferrari LaFerrari", "description": "Híbrido italiano de alta performance, 950 cv.", "price": 2500000, "stock": 1, "image": "https://upload.wikimedia.org/wikipedia/commons/3/32/Ferrari_LaFerrari_2013.jpg" },
+  { "name": "McLaren P1", "description": "Híbrido britânico extremo, aerodinâmica avançada.", "price": 2000000, "stock": 1, "image": "https://upload.wikimedia.org/wikipedia/commons/7/7b/McLaren_P1_-_Flickr_-_Alexandre_Pr%C3%A9vot.jpg" },
+  { "name": "Porsche 918 Spyder", "description": "Híbrido alemão, tecnologia de ponta em motor e suspensão.", "price": 1800000, "stock": 1, "image": "https://upload.wikimedia.org/wikipedia/commons/1/19/Porsche_918_Spyder_2013.jpg" }
+
+
+]

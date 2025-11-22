@@ -1,3 +1,4 @@
+//userLogin.jsx
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { sendForm } from '../../utils/functionsReUsed';
@@ -31,7 +32,7 @@ function Login() {
     setIsLoading(true);
     try {
       await sendForm({ url: 'api/login', body: formData });
-      navigate('/Dashboard');
+      navigate('/Dashboard3');
     } catch (err) {
       alert(err.message || 'Erro ao logar');
     } finally {

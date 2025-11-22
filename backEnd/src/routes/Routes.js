@@ -16,5 +16,8 @@ router.post('/sendMessage', upload.none(), formsSends.sendContact);
 router.get("/profile", protect, userControll.getProfile);
 // product routes
 router.post('/products', protect, productControll.createProduct);
+router.get('/products', protect, productControll.getProducts);    // read
+router.put('/products/:id', protect, productControll.updateProduct); // update
+router.delete('/products/:id', protect, productControll.deleteProduct); // delete
 
 module.exports = router;

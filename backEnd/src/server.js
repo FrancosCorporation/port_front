@@ -16,7 +16,8 @@ const app = express();
 
 app.use(cors({
   //origin: process.env.URL_FRONT, // URL do seu frontend React
-  origin: true, // URL qualquer origem
+  //origin: true, // URL qualquer origem
+  origin: "https://localhost:3000",
   credentials: true, // permite enviar cookies
 }));
 

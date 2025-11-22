@@ -24,16 +24,23 @@ const ProductSchema = new mongoose.Schema({
     },
     image: {
         type: String,
-        default: 'no-photo.jpg', // Placeholder para imagem
+        default: 'https://imgs.search.brave.com/9cd8GovxZ2sikDcLTKgRjxrEakKQmXBGplCP6wAp9XE/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4t/aWNvbnMtcG5nLmZy/ZWVwaWsuY29tLzI1/Ni85MTg3LzkxODc1/NTgucG5nP3NlbXQ9/YWlzX3doaXRlX2xh/YmVs',
     },
-    // Chave de referência (FOREIGN KEY) para o usuário que criou o produto
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
         required: true,
     },
 }, {
-    timestamps: true // Adiciona createdAt e updatedAt
+    timestamps: true,
+});
+
+// Middleware para garantir que image nunca fique vazio
+ProductSchema.pre('save', function(next) {
+    if (!this.image || this.image.trim() === '') {
+        this.image = 'https://imgs.search.brave.com/9cd8GovxZ2sikDcLTKgRjxrEakKQmXBGplCP6wAp9XE/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9jZG4t/aWNvbnMtcG5nLmZy/ZWVwaWsuY29tLzI1/Ni85MTg3LzkxODc1/NTgucG5nP3NlbXQ9/YWlzX3doaXRlX2xh/YmVs';
+    }
+    next();
 });
 
 const Product = mongoose.model('Product', ProductSchema);

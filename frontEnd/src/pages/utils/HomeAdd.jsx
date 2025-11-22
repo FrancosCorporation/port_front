@@ -5,38 +5,37 @@ import {
   ProductCard, 
   ProductModal, 
   ProductViewModal 
-} from './ProductComponents'; // 1. Importar o ViewModal
+} from './ProductComponents';
+import { getProducts, deleteProduct } from '../../components/services/productService';
 import "./HomeAdd.css";
 
 export default function HomeAdd() {
-  const [itens, setItens] = useState(() => JSON.parse(localStorage.getItem("itens")) || []);
+  const [itens, setItens] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
-  
+
   // Modal de Edição/Criação
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
 
-  // 2. Estado para o Modal de Visualização
+  // Modal de Visualização
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
   const [viewingItem, setViewingItem] = useState(null);
 
+  // Buscar produtos do backend ao carregar
   useEffect(() => {
-    localStorage.setItem("itens", JSON.stringify(itens));
-  }, [itens]);
-
-  const handleSaveItem = (itemData) => {
-    if (editingItem) {
-      setItens(
-        itens.map((item) => (item.id === itemData.id ? itemData : item))
-      );
-    } else {
-      setItens([...itens, itemData]);
+    async function fetchProducts() {
+      try {
+        const products = await getProducts();
+        // Filtra apenas produtos válidos com _id
+        setItens(products.filter(p => p._id));
+      } catch (err) {
+        console.error("Erro ao buscar produtos:", err);
+      }
     }
-    setIsModalOpen(false);
-    setEditingItem(null);
-  };
+    fetchProducts();
+  }, []);
 
-  // Funções de Abertura/Fechamento (Edição)
+  // ---------- Funções de Modal ----------
   const handleOpenAddModal = () => {
     setEditingItem(null);
     setIsModalOpen(true);
@@ -45,50 +44,76 @@ export default function HomeAdd() {
     setEditingItem(item);
     setIsModalOpen(true);
   };
+  const handleSaveItem = (savedProduct) => {
+    if (!savedProduct?._id) return; // garante que só salva itens válidos do backend
 
-  // 3. Funções de Abertura/Fechamento (Visualização)
+    const exists = itens.find(item => item._id === savedProduct._id);
+    if (exists) {
+      setItens(itens.map(item => item._id === savedProduct._id ? savedProduct : item));
+    } else {
+      setItens([savedProduct, ...itens]);
+    }
+    setIsModalOpen(false);
+    setEditingItem(null);
+  };
+
   const handleOpenViewModal = (item) => {
     setViewingItem(item);
     setIsViewModalOpen(true);
   };
   const handleCloseViewModal = () => {
-    setIsViewModalOpen(false);
     setViewingItem(null);
+    setIsViewModalOpen(false);
   };
 
-  // ... (funções de delete e seleção permanecem iguais) ...
-  const handleDelete = (id) => {
-    if (window.confirm("Deseja realmente deletar este item?")) {
-      setItens(itens.filter((item) => item.id !== id));
-      setSelectedItems(selectedItems.filter((i) => i !== id));
+  // ---------- Funções de Delete ----------
+  const handleDelete = async (_id) => {
+    if (!window.confirm("Deseja realmente deletar este item?")) return;
+    try {
+      await deleteProduct(_id);
+      setItens(itens.filter(item => item._id !== _id));
+      setSelectedItems(selectedItems.filter(id => id !== _id));
+    } catch (err) {
+      console.error("Erro ao deletar produto:", err);
     }
   };
-  const handleSelectItem = (id) => {
-    setSelectedItems((prev) =>
-      prev.includes(id) ? prev.filter((s) => s !== id) : [...prev, id]
+  const handleBulkDelete = async () => {
+    if (selectedItems.length === 0) return;
+    if (!window.confirm(`Deseja deletar ${selectedItems.length} itens selecionados?`)) return;
+    try {
+      for (const id of selectedItems) {
+        await deleteProduct(id);
+      }
+      setItens(itens.filter(item => !selectedItems.includes(item._id)));
+      setSelectedItems([]);
+    } catch (err) {
+      console.error("Erro ao deletar produtos em massa:", err);
+    }
+  };
+
+  // ---------- Funções de Seleção ----------
+  const handleSelectItem = (_id) => {
+    setSelectedItems(prev =>
+      prev.includes(_id) ? prev.filter(id => id !== _id) : [...prev, _id]
     );
   };
   const handleSelectAll = () => {
-    if (selectedItems.length === itens.length) setSelectedItems([]);
-    else setSelectedItems(itens.map((i) => i.id));
-  };
-  const handleBulkDelete = () => {
-    if (selectedItems.length === 0) return;
-    if (window.confirm(`Deletar ${selectedItems.length} itens selecionados?`)) {
-      setItens(itens.filter((i) => !selectedItems.includes(i.id)));
+    if (selectedItems.length === itens.length) {
       setSelectedItems([]);
+    } else {
+      setSelectedItems(itens.map(item => item._id));
     }
   };
 
   return (
     <div className="home-add-container">
-      {/* ... (seção .add-section e .bulk-actions sem mudanças) ... */}
       <div className="add-section">
         <h3>Gerenciador de Itens</h3>
         <button className="add-button" onClick={handleOpenAddModal} title="Adicionar novo item">
           <Plus size={18} /> Adicionar Item
         </button>
       </div>
+
       {itens.length > 0 && (
         <div className="bulk-actions">
           <button onClick={handleSelectAll}>
@@ -100,22 +125,20 @@ export default function HomeAdd() {
         </div>
       )}
 
-
       <ul className="itens-list">
-        {itens.map((item) => (
+        {itens.map(item => (
           <ProductCard
-            key={item.id}
+            key={item._id}
             item={item}
-            isSelected={selectedItems.includes(item.id)}
+            isSelected={selectedItems.includes(item._id)}
             onSelect={handleSelectItem}
             onEdit={handleOpenEditModal}
             onDelete={handleDelete}
-            onOpenView={handleOpenViewModal} // 4. Passar a função para o card
+            onOpenView={handleOpenViewModal}
           />
         ))}
       </ul>
 
-      {/* Modal de Edição/Criação */}
       <ProductModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
@@ -123,7 +146,6 @@ export default function HomeAdd() {
         itemToEdit={editingItem}
       />
 
-      {/* 5. Renderizar o Modal de Visualização */}
       <ProductViewModal
         isOpen={isViewModalOpen}
         onClose={handleCloseViewModal}
