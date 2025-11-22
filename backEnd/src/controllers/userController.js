@@ -44,6 +44,7 @@ const userController = {
 
       // ✅ 6. Gera o hash da senha
       const hashedPassword = await bcrypt.hash(password, 10);
+      
 
       // ✅ 7. Cria o usuário
       const user = await User.create({
