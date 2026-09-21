@@ -1,5 +1,23 @@
 # port_front
 
+## 🐳 Instalação e Execução (Docker) — recomendado
+
+### Pré-requisitos
+- [Docker](https://docs.docker.com/get-docker/) + Docker Compose
+
+### Rodar com Docker
+```bash
+docker compose up --build
+```
+
+
+### Sem Docker (local)
+```bash
+npm install
+npm start
+```
+
+
 Front-end de portfólio pessoal em **React 19**: página única com animações,
 seções de apresentação e formulário de contato integrado ao **EmailJS**.
 
