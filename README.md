@@ -1,67 +1,53 @@
-# Getting Started
+# port_front
 
-Clone repository
+Front-end de portfólio pessoal em **React 19**: página única com animações,
+seções de apresentação e formulário de contato integrado ao **EmailJS**.
 
-run command
+![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
+![Framer Motion](https://img.shields.io/badge/Framer%20Motion-0055FF?style=flat-square&logo=framer&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)
+![Status](https://img.shields.io/badge/status-projeto%20pessoal-blue?style=flat-square)
 
-npm install -g create-react-app
-npm install --save react react-dom
+## Sobre
 
-### `npm start`
+Aplicação React (Create React App) criada como portfólio online: apresenta o
+autor, seus projetos e um canal de contato direto por e-mail, com animações
+de entrada/saída via Framer Motion.
 
+## Funcionalidades
 
+Comprovadas pelo código em `src/`:
 
-### `npm test`
+- **Single page** com seções institucionais (`App.js`).
+- **Formulário de contato** (`ContactForm.jsx`) com envio via `emailjs-com`.
+- **Animações** com `framer-motion`.
+- **Testes** com Testing Library (`App.test.js`).
+- Assets próprios em `public/` (logos, favicon, manifest).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Como rodar
 
-### `npm run build`
+```bash
+npm install
+npm start        # http://localhost:3000
+npm test         # testes
+npm run build    # build de produção
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+> O formulário de contato depende de credenciais do EmailJS (service ID,
+> template e public key) — configure-as no componente antes de usar em
+> produção.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Estrutura do projeto
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+public/          # index.html, logos, manifest
+src/
+├── App.js       # composição da página
+├── ContactForm.jsx
+└── index.js
+```
 
-### `npm run eject`
+## Licença
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+MIT — veja [LICENSE](LICENSE).
