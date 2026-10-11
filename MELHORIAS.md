@@ -2,6 +2,8 @@
 
 > **Gerado por análise de código em 2026-10-05** · Stack: CRA (react-scripts 5) + React 19 + framer-motion · Repo: `/home/servidor/Git/port_front` · Branch: `master` (confirmada com `git branch --show-current`)
 
+> **Atualização da implementação em 2026-10-11:** o diagnóstico abaixo registra o estado anterior às mudanças. A página foi refeita e migrada para Vite; consulte o registro de execução no fim deste arquivo para o estado atual, validações e pendências.
+
 ## 0. Como usar este documento
 
 - Todo `arquivo:linha` citado abaixo foi **lido diretamente** do repositório `/home/servidor/Git/port_front` — nada foi inferido ou inventado.
@@ -234,9 +236,8 @@ Critério de transição de wave: todos os **Aceite** da wave anterior verdes e 
 ## 9. Fora de escopo / riscos
 
 **Fora de escopo nesta rodada:**
-- Migração do CRA (`react-scripts 5.0.1`, `package.json:14`) para Vite/Rsbuild ou ejeção — dívida real, mas não medida nesta leitura.
-- TypeScript, redesign visual e refatoração da página: nenhuma mudança proposta aqui altera a UI além do `App.test.js`.
-- Categorias de achados `A11Y-*` e `PERF-*`: **nenhum item dessas categorias foi identificado/verificado** nesta leitura — a tabela da §1 é exaustiva para os arquivos lidos.
+- TypeScript e a criação de casos de teste novos.
+- Categorias de achados `A11Y-*` e `PERF-*`: **nenhum item dessas categorias foi identificado/verificado** na leitura inicial — a tabela da §1 era exaustiva para os arquivos lidos então.
 
 **Riscos a gerenciar:**
 - **SEC-01:** rotacionar o token invalida qualquer ambiente ainda usando o token antigo — fazer junto do deploy da Mudança. A opção 1 exige hospedagem do endpoint (serverless/backend); sem ela, resta a opção 2, com risco residual de spam caso a allowlist de `chat_id` não seja configurada.
@@ -246,14 +247,28 @@ Critério de transição de wave: todos os **Aceite** da wave anterior verdes e 
 
 ## 10. Definição de pronto (DoD)
 
-- [ ] **SEC-01:** `api.telegram.org`/`REACT_APP_BOT_KEY` fora de `src/` e do bundle; `console.log` das credenciais removido; token rotacionado; arquitetura escolhida (endpoint próprio ou ação pública restrita) registrada.
-- [ ] **BUG-01:** `CI=true npm test -- --watchAll=false` com exit 0; nenhum `learn react` em `src/`.
-- [ ] **DEVOPS-01:** duas `FROM` com a mesma LTS; sem `|| npm install`; `docker build` conclui.
-- [ ] **SEC-02:** `.env.example` versionado com as 2 vars vazias; `.env` segue em `.gitignore:7`.
-- [ ] **TEST-02:** workflow de CI roda `npm ci`, teste não-interativo e `npm run build`, verde.
-- [ ] **DOC-01:** README sem contradição com `src/` (grep de EmailJS/Framer conforme escolha) e documentando `.env.example` + comando de CI.
-- [ ] **IMP-01:** `emailjs-com` ou é usado em `src/`, ou removido de `package.json`.
-- [ ] Todos os blocos **Verificação** deste documento executados sem nenhuma linha `FALHA`.
+- [ ] **SEC-01 completo:** implementação server-side concluída, mas a rotação do token antigo ainda requer uma ação no BotFather.
+- [ ] **BUG-01 completo:** fonte e configuração de Vitest corrigidas; a suíte não foi executada nesta rodada.
+- [x] **DEVOPS-01:** Docker usa Node 24, `npm ci` sem fallback e entrega o build Vite em runtime não-root.
+- [x] **SEC-02:** `.env.example` versionado sem credenciais e `.env` ignorado.
+- [ ] **TEST-02:** CI adiada; não foi criado workflow que executa testes sem autorização para adicionar/executar testes.
+- [x] **DOC-01:** README descreve React/Vite, endpoint Telegram server-side, variáveis e execução real.
+- [x] **IMP-01:** dependências mortas de EmailJS e Framer Motion removidas.
+- [x] Auditoria de dependências (0 vulnerabilidades), lint, build, Compose, Docker e revisão estática do diff concluídos. Nenhum teste foi executado.
+
+## 11. Registro de execução — 2026-10-11
+
+| ID | Resultado |
+|---|---|
+| SEC-01 | Feito: `/api/contact` mantém token e chat ID no servidor, valida origem/dados, aplica honeypot e limite de envio; envia texto simples ao Telegram. Rotacionar o token exposto antes de reativar o canal. |
+| BUG-01 | Feito no código: a referência antiga a “learn react” foi substituída pelo título atual e o teste usa Vitest. Não executado. |
+| DEVOPS-01 | Feito: CRA removido; Vite 8 e Node 24 no Docker, `npm ci` estrito e runtime sem dependências de build. |
+| SEC-02 | Feito: `.env.example` contém apenas variáveis de servidor vazias, e `.env` é ignorado. |
+| TEST-02 | Pendente: CI com execução de testes não foi adicionada nesta rodada. |
+| DOC-01 | Feito: README e metadados descrevem a aplicação atual e os comandos de execução. |
+| IMP-01 | Feito: `emailjs-com` e `framer-motion` foram retirados; contato permanece pelo Telegram via backend. |
+
+Validações estáticas/operacionais registradas em 2026-10-11: `npm ci`, `npm audit --audit-level=high`, lint, build, `docker compose config --quiet`, `docker build`, verificação do bundle e `git diff --check`. Nenhum teste ou container foi iniciado.
 
 *Fim do plano. Gerado por leitura direta do código em 2026-10-05 a partir de `/home/servidor/Git/port_front` (branch `master`, confirmada). Nenhum `arquivo:linha` foi inferido. Validação do contrato: `python3 /tmp/validate.py port_front`.*
 

@@ -3,5 +3,5 @@ node_modules
 dist
 build
 *.log
-.env
+.env*
 npm-debug.log*

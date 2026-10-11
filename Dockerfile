@@ -1,18 +1,16 @@
-# Build
-FROM node:16-alpine AS build
+FROM node:24-alpine AS build
 WORKDIR /app
-COPY package*.json ./
-RUN npm ci || npm install
+COPY package.json package-lock.json ./
+RUN npm ci
 COPY . .
-ARG REACT_APP_*=""
-ENV GENERATE_SOURCEMAP=false
 RUN npm run build
 
-# Serve
-FROM node:20-alpine
+FROM node:24-alpine AS runtime
+ENV NODE_ENV=production PORT=3000
 WORKDIR /app
-RUN npm i -g serve
-COPY --from=build /app/build ./build
-ENV PORT=3000
+COPY --from=build --chown=node:node /app/dist ./dist
+COPY --chown=node:node server.mjs ./server.mjs
+USER node
 EXPOSE 3000
-CMD ["sh", "-c", "serve -s build -l $PORT"]
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 CMD ["node", "-e", "fetch('http://127.0.0.1:3000/healthz').then((response) => process.exit(response.ok ? 0 : 1)).catch(() => process.exit(1))"]
+CMD ["node", "server.mjs"]
