@@ -308,6 +308,8 @@ const server = createServer(async (request, response) => {
   createReadStream(filePath).pipe(response);
 });
 
-server.listen(port, '0.0.0.0', () => {
+const apiHost = process.env.API_HOST || '127.0.0.1';
+
+server.listen(port, apiHost, () => {
   console.log(`Portfólio disponível na porta ${port}`);
 });

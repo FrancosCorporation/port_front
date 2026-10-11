@@ -37,7 +37,8 @@ npm run dev
 ```
 
 Abra <http://127.0.0.1:5173>. O servidor Vite encaminha `/api` para a API local
-na porta 3001.
+na porta 3001. A API local escuta apenas em `127.0.0.1`; a imagem Docker define
+o bind interno necessário para receber conexões pela rede do container.
 
 ## Docker Compose
 

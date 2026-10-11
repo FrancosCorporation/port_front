@@ -6,7 +6,7 @@ COPY . .
 RUN npm run build
 
 FROM node:24-alpine AS runtime
-ENV NODE_ENV=production PORT=3000
+ENV NODE_ENV=production PORT=3000 API_HOST=0.0.0.0
 WORKDIR /app
 COPY --from=build --chown=node:node /app/dist ./dist
 COPY --chown=node:node server.mjs ./server.mjs

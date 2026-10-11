@@ -33,6 +33,7 @@
 | BUG-01 | P0 | `npm test` falha (teste espera "learn react", `App.js` não tem) e `emailjs-com` é dependência morta. | `App.test.js:4,6`; grep `learn react` em `src/` só acha o teste; `package.json:10` vs grep `emailjs` vazio em `src/` |
 | DEVOPS-01 | P1 | Build em `node:16-alpine` (EOL), `npm ci \|\| npm install` mascara falha, serve em `node:20`. | `Dockerfile:2`, `Dockerfile:5`, `Dockerfile:12` |
 | SEC-02 | P1 | `.env.example` inexistente — vars `REACT_APP_*` não documentadas. | `ls .env.example` → arquivo inexistente; `.gitignore:7` só ignora o `.env` real |
+| SEC-03 | P2 | API local escuta em todas as interfaces sem necessidade. | Antes da correção, `server.mjs:311` fixava `0.0.0.0`; `npm run api` usava essa configuração |
 | TEST-02 | P2 | Nenhuma CI (sem `.github/`, sem `.gitlab-ci.yml`) — o teste quebrado passa despercebido. | `.github/` ausente; `.gitlab-ci.yml` ausente; `package.json:20` |
 | DOC-01 | P2 | README diz que o contato usa EmailJS; o código usa Telegram. | `README.md:22,41,55-57` vs `ContactForm.jsx:20` |
 | IMP-01 | P3 | Intenção (EmailJS em deps/README) diverge do código (Telegram). | `package.json:10` vs grep `emailjs` vazio em `src/` |
@@ -45,6 +46,7 @@
 | BUG-01 | [P0] | Teste quebrado + dependência morta | Baixo | 0 |
 | DEVOPS-01 | [P1] | Dockerfile em Node 16 EOL e `npm ci` mascarado | Baixo | 1 |
 | SEC-02 | [P1] | Criar `.env.example` | Baixo | 1 |
+| SEC-03 | [P2] | Limitar a API de desenvolvimento ao loopback | Baixo | 1 |
 | TEST-02 | [P2] | Adicionar CI que roda teste e build | Baixo | 2 |
 | DOC-01 | [P2] | README divergente (EmailJS vs Telegram) | Baixo | 2 |
 | IMP-01 | [P3] | Decidir destino do `emailjs-com` | Baixo | 3 |
@@ -104,6 +106,25 @@ grep -c "^REACT_APP_" .env.example
 grep -q "^REACT_APP_BOT_KEY=$" .env.example && grep -q "^REACT_APP_ID_TELEGRAM=$" .env.example && echo 'OK: as 2 vars vazias'
 git check-ignore -q .env && echo 'OK: .env continua ignorado pelo git'
 grep -n "env.example" README.md
+```
+
+### SEC-03 — API de desenvolvimento escutava em todas as interfaces [P2]
+
+**Arquivo:** `server.mjs:311-313` e `Dockerfile:9`.
+
+**Evidência original:** antes da correção, `server.mjs:311` fixava `server.listen(port, '0.0.0.0')`. O comando local `npm run api` executava esse mesmo servidor diretamente. O Compose publicava a porta em `127.0.0.1`, mas essa proteção só valia para a porta do container.
+
+**Impacto:** iniciar a API local poderia permitir conexões de outras máquinas na rede, embora o README descreva uma configuração de desenvolvimento local.
+
+**Mudança:** fazer o servidor usar `API_HOST` com padrão `127.0.0.1`; definir `API_HOST=0.0.0.0` somente na imagem para permitir a rede do container; documentar os dois contextos.
+
+**Aceite:** `npm run api` usa loopback por padrão; runtime Docker escuta internamente em todas as interfaces, com publicação externa do Compose limitada a `127.0.0.1`.
+
+**Verificação:**
+
+```bash
+rg -n "API_HOST|server\.listen" server.mjs Dockerfile
+grep -q '"127.0.0.1:.*:3000"' compose.yaml
 ```
 
 ## 4. Bugs e defeitos funcionais
@@ -227,7 +248,7 @@ grep -n "watchAll=false" README.md && echo 'OK: comando de teste documentado' ||
 | Wave | Itens | Por quê |
 |---|---|---|
 | **Wave 0 (imediato)** | SEC-01, BUG-01 | P0: credencial pública e suíte vermelha travam todo o resto. SEC-01 exige decisão de arquitetura (opção 1 ou 2 da Mudança) e **rotacionar o token**; BUG-01 é rápido e destrava a CI. |
-| **Wave 1** | DEVOPS-01, SEC-02 | P1: build confiável (mesma LTS nas duas stages, `npm ci` puro) + onboarding seguro com `.env.example`. |
+| **Wave 1** | DEVOPS-01, SEC-02, SEC-03 | P1/P2: build confiável, variáveis documentadas e API de desenvolvimento local por padrão. |
 | **Wave 2** | TEST-02, DOC-01 | P2: CI só gera valor com o teste verde (BUG-01); README é reescrito sobre o código já corrigido. |
 | **Wave 3** | IMP-01 | P3: decisão de produto sobre `emailjs-com`, feita junto com a revisão final do README. |
 
@@ -251,6 +272,7 @@ Critério de transição de wave: todos os **Aceite** da wave anterior verdes e 
 - [ ] **BUG-01 completo:** fonte e configuração de Vitest corrigidas; a suíte não foi executada nesta rodada.
 - [x] **DEVOPS-01:** Docker usa Node 24, `npm ci` sem fallback e entrega o build Vite em runtime não-root.
 - [x] **SEC-02:** `.env.example` versionado sem credenciais e `.env` ignorado.
+- [x] **SEC-03:** API de desenvolvimento usa loopback por padrão; Docker configura o bind interno.
 - [ ] **TEST-02:** CI adiada; não foi criado workflow que executa testes sem autorização para adicionar/executar testes.
 - [x] **DOC-01:** README descreve React/Vite, endpoint Telegram server-side, variáveis e execução real.
 - [x] **IMP-01:** dependências mortas de EmailJS e Framer Motion removidas.
@@ -264,11 +286,14 @@ Critério de transição de wave: todos os **Aceite** da wave anterior verdes e 
 | BUG-01 | Feito no código: a referência antiga a “learn react” foi substituída pelo título atual e o teste usa Vitest. Não executado. |
 | DEVOPS-01 | Feito: CRA removido; Vite 8 e Node 24 no Docker, `npm ci` estrito e runtime sem dependências de build. |
 | SEC-02 | Feito: `.env.example` contém apenas variáveis de servidor vazias, e `.env` é ignorado. |
+| SEC-03 | Feito: API local usa loopback por padrão; a imagem Docker define `API_HOST=0.0.0.0` para o bind interno. Compose continua publicando apenas em loopback. |
 | TEST-02 | Pendente: CI com execução de testes não foi adicionada nesta rodada. |
 | DOC-01 | Feito: README e metadados descrevem a aplicação atual e os comandos de execução. |
 | IMP-01 | Feito: `emailjs-com` e `framer-motion` foram retirados; contato permanece pelo Telegram via backend. |
 
 Validações estáticas/operacionais registradas em 2026-10-11: `npm ci`, `npm audit --audit-level=high`, lint, build, `docker compose config --quiet`, `docker build`, verificação do bundle e `git diff --check`. Nenhum teste ou container foi iniciado.
+
+Atualização SEC-03: `node --check server.mjs`, lint, build, Compose config, Docker build e inspeção estática de bind passaram. Não iniciei container nem executei testes.
 
 *Fim do plano. Gerado por leitura direta do código em 2026-10-05 a partir de `/home/servidor/Git/port_front` (branch `master`, confirmada). Nenhum `arquivo:linha` foi inferido. Validação do contrato: `python3 /tmp/validate.py port_front`.*
 
