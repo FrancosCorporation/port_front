@@ -34,7 +34,7 @@
 | DEVOPS-01 | P1 | Build em `node:16-alpine` (EOL), `npm ci \|\| npm install` mascara falha, serve em `node:20`. | `Dockerfile:2`, `Dockerfile:5`, `Dockerfile:12` |
 | SEC-02 | P1 | `.env.example` inexistente — vars `REACT_APP_*` não documentadas. | `ls .env.example` → arquivo inexistente; `.gitignore:7` só ignora o `.env` real |
 | SEC-03 | P2 | API local escuta em todas as interfaces sem necessidade. | Antes da correção, `server.mjs:311` fixava `0.0.0.0`; `npm run api` usava essa configuração |
-| TEST-02 | P2 | Nenhuma CI (sem `.github/`, sem `.gitlab-ci.yml`) — o teste quebrado passa despercebido. | `.github/` ausente; `.gitlab-ci.yml` ausente; `package.json:20` |
+| TEST-02 | P2 | A suíte não é executada automaticamente; CI estática cobre audit, lint, build e Compose. | `.github/workflows/ci.yml`; não contém comando de teste |
 | DOC-01 | P2 | README diz que o contato usa EmailJS; o código usa Telegram. | `README.md:22,41,55-57` vs `ContactForm.jsx:20` |
 | IMP-01 | P3 | Intenção (EmailJS em deps/README) diverge do código (Telegram). | `package.json:10` vs grep `emailjs` vazio em `src/` |
 
@@ -47,7 +47,8 @@
 | DEVOPS-01 | [P1] | Dockerfile em Node 16 EOL e `npm ci` mascarado | Baixo | 1 |
 | SEC-02 | [P1] | Criar `.env.example` | Baixo | 1 |
 | SEC-03 | [P2] | Limitar a API de desenvolvimento ao loopback | Baixo | 1 |
-| TEST-02 | [P2] | Adicionar CI que roda teste e build | Baixo | 2 |
+| DEVOPS-02 | [P2] | Automatizar verificações estáticas em Node 22/24 | Baixo | 2 |
+| TEST-02 | [P2] | Automatizar a suíte; CI estática disponível | Baixo | 2 |
 | DOC-01 | [P2] | README divergente (EmailJS vs Telegram) | Baixo | 2 |
 | IMP-01 | [P3] | Decidir destino do `emailjs-com` | Baixo | 3 |
 
@@ -172,28 +173,26 @@ grep -n "emailjs-com" package.json && echo 'REVISAR: dep declarada — deve ser 
 npm ls emailjs-com 2>/dev/null || true
 ```
 
-## 5. Qualidade: testes
+## 5. Qualidade: testes e CI
 
-### TEST-02 — Nenhuma CI roda o teste (quebrado pelo BUG-01) [P2]
+### TEST-02 — Automatizar a suíte existente [P2]
 
-**Arquivo:** ausência de pipeline — `/home/servidor/Git/port_front/.github/` (diretório não existe) e `/home/servidor/Git/port_front/.gitlab-ci.yml` (arquivo não existe).
+**Estado atual:** o workflow `.github/workflows/ci.yml` executa `npm ci`, `npm audit --audit-level=high`, lint, build e `docker compose config --quiet` em Node 22/24. Ele roda em push e pull request, com permissões somente de leitura, e não inicia serviços nem executa testes.
 
-**Evidência:** `ls .github` → diretório inexistente; `ls .gitlab-ci.yml` → arquivo inexistente. `package.json:20` define `"test": "react-scripts test"`, que roda em watch mode por padrão e só local. O único apito de teste hoje é manual (`README.md:51` manda rodar `npm test`), e esse teste está quebrado (BUG-01, confirmado por grep negativo de "learn react" em `App.js`).
+**Pendência:** a suíte Vitest existente não está no workflow. Ela continua disponível pelo comando `npm run test`, mas permanece sem validação automática até uma rodada em que a execução de testes esteja autorizada.
 
-**Impacto:** Nada executa `npm test` nem `npm run build` em push/PR — o teste quebrado do BUG-01 e qualquer regressão futura passam despercebidos; a suíte não cumpre função de rede de segurança.
+**Aceite:** manter as verificações estáticas verdes; adicionar a suíte à CI somente depois que a restrição de não executar testes for retirada e os testes estiverem revisados.
 
-**Mudança:** Adicionar workflow de CI (GitHub Actions em `.github/workflows/ci.yml`) que, em push e pull request: instala com `npm ci`, roda `CI=true npm test -- --watchAll=false` e `npm run build`. Pré-requisito: BUG-01 verde antes de ativar (Wave 0 precede a Wave 2).
-
-**Aceite:** workflow versionado, executando teste não-interativo e build; pipeline fica verde no PR que corrige o BUG-01.
-
-**Verificação:**
+**Verificação estática:**
 
 ```bash
 cd /home/servidor/Git/port_front
-test -f .github/workflows/ci.yml && echo 'OK: workflow existe'
-grep -q "npm ci" .github/workflows/ci.yml && echo 'OK: instala com npm ci' || echo 'FALHA: sem npm ci'
-grep -q "watchAll=false" .github/workflows/ci.yml && echo 'OK: teste nao-interativo' || echo 'FALHA: teste nao roda em CI'
-grep -q "npm run build" .github/workflows/ci.yml && echo 'OK: build na CI' || echo 'FALHA: sem build'
+grep -q "npm ci" .github/workflows/ci.yml
+grep -q "npm audit --audit-level=high" .github/workflows/ci.yml
+grep -q "npm run lint" .github/workflows/ci.yml
+grep -q "npm run build" .github/workflows/ci.yml
+grep -q "docker compose config --quiet" .github/workflows/ci.yml
+! grep -Eq 'npm (run )?test|vitest' .github/workflows/ci.yml
 ```
 
 ## 6. DevOps / Infra
@@ -249,7 +248,7 @@ grep -n "watchAll=false" README.md && echo 'OK: comando de teste documentado' ||
 |---|---|---|
 | **Wave 0 (imediato)** | SEC-01, BUG-01 | P0: credencial pública e suíte vermelha travam todo o resto. SEC-01 exige decisão de arquitetura (opção 1 ou 2 da Mudança) e **rotacionar o token**; BUG-01 é rápido e destrava a CI. |
 | **Wave 1** | DEVOPS-01, SEC-02, SEC-03 | P1/P2: build confiável, variáveis documentadas e API de desenvolvimento local por padrão. |
-| **Wave 2** | TEST-02, DOC-01 | P2: CI só gera valor com o teste verde (BUG-01); README é reescrito sobre o código já corrigido. |
+| **Wave 2** | TEST-02, DOC-01 | P2: verificações estáticas automatizadas; a suíte fica pendente até haver autorização para executá-la. README descreve o código corrigido. |
 | **Wave 3** | IMP-01 | P3: decisão de produto sobre `emailjs-com`, feita junto com a revisão final do README. |
 
 Critério de transição de wave: todos os **Aceite** da wave anterior verdes e todos os blocos **Verificação** executados sem nenhuma linha `FALHA`.
@@ -262,7 +261,7 @@ Critério de transição de wave: todos os **Aceite** da wave anterior verdes e 
 
 **Riscos a gerenciar:**
 - **SEC-01:** rotacionar o token invalida qualquer ambiente ainda usando o token antigo — fazer junto do deploy da Mudança. A opção 1 exige hospedagem do endpoint (serverless/backend); sem ela, resta a opção 2, com risco residual de spam caso a allowlist de `chat_id` não seja configurada.
-- **TEST-02:** workflow pode falhar na primeira execução por diferença de ambiente — validar localmente com os mesmos comandos antes de subir.
+- **TEST-02:** a suíte ainda não roda automaticamente; o workflow cobre verificações estáticas e não executa testes.
 - **DOC-01/IMP-01:** enquanto o README não for corrigido, ele continua induzindo novos contribuidores a configurar EmailJS.
 - **DEVOPS-01:** trocar as `FROM` pode revelar incompatibilidades de build do CRA na LTS nova — rodar `docker build` na Wave 1 antes de deletar nada.
 
@@ -273,7 +272,7 @@ Critério de transição de wave: todos os **Aceite** da wave anterior verdes e 
 - [x] **DEVOPS-01:** Docker usa Node 24, `npm ci` sem fallback e entrega o build Vite em runtime não-root.
 - [x] **SEC-02:** `.env.example` versionado sem credenciais e `.env` ignorado.
 - [x] **SEC-03:** API de desenvolvimento usa loopback por padrão; Docker configura o bind interno.
-- [ ] **TEST-02:** CI adiada; não foi criado workflow que executa testes sem autorização para adicionar/executar testes.
+- [ ] **TEST-02:** suíte Vitest fora da CI até a execução de testes estar autorizada; o workflow estático foi criado e validado separadamente.
 - [x] **DOC-01:** README descreve React/Vite, endpoint Telegram server-side, variáveis e execução real.
 - [x] **IMP-01:** dependências mortas de EmailJS e Framer Motion removidas.
 - [x] Auditoria de dependências (0 vulnerabilidades), lint, build, Compose, Docker e revisão estática do diff concluídos. Nenhum teste foi executado.
@@ -294,6 +293,15 @@ Critério de transição de wave: todos os **Aceite** da wave anterior verdes e 
 Validações estáticas/operacionais registradas em 2026-10-11: `npm ci`, `npm audit --audit-level=high`, lint, build, `docker compose config --quiet`, `docker build`, verificação do bundle e `git diff --check`. Nenhum teste ou container foi iniciado.
 
 Atualização SEC-03: `node --check server.mjs`, lint, build, Compose config, Docker build e inspeção estática de bind passaram. Não iniciei container nem executei testes.
+
+## 12. Registro de execução — 2026-10-12
+
+| ID | Resultado |
+|---|---|
+| DEVOPS-02 | Workflow estático criado para Node 22/24, Ubuntu 24.04, `npm ci`, audit alto, lint, build e validação do Compose. Sem testes, segredos ou serviços. |
+| TEST-02 | Pendente: a suíte Vitest não foi adicionada ao workflow nem executada. |
+
+Validações locais da atualização: instalação limpa, audit alto, lint, build, Compose config, sintaxe YAML e `git diff --check`; a CI remota ainda será registrada após o push.
 
 *Fim do plano. Gerado por leitura direta do código em 2026-10-05 a partir de `/home/servidor/Git/port_front` (branch `master`, confirmada). Nenhum `arquivo:linha` foi inferido. Validação do contrato: `python3 /tmp/validate.py port_front`.*
 

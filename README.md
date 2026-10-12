@@ -65,6 +65,12 @@ npm run test
 O projeto usa Biome para lint, Vite para gerar `dist/` e Vitest com Testing
 Library para a suíte existente.
 
+## Integração contínua
+
+Em push e pull request, a CI valida dependências, lint, build e configuração do
+Docker Compose em Node.js 22 e 24. A suíte Vitest continua disponível por
+`npm run test`, mas ainda não faz parte da CI.
+
 ## Estrutura
 
 ```text
