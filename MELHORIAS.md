@@ -298,10 +298,10 @@ Atualização SEC-03: `node --check server.mjs`, lint, build, Compose config, Do
 
 | ID | Resultado |
 |---|---|
-| DEVOPS-02 | Workflow estático criado para Node 22/24, Ubuntu 24.04, `npm ci`, audit alto, lint, build e validação do Compose. Sem testes, segredos ou serviços. |
+| DEVOPS-02 | Workflow estático criado para Node 22/24, Ubuntu 24.04, `npm ci`, audit alto, lint, build e validação do Compose. CI `38198478963` verde. Sem testes, segredos ou serviços. |
 | TEST-02 | Pendente: a suíte Vitest não foi adicionada ao workflow nem executada. |
 
-Validações locais da atualização: instalação limpa, audit alto, lint, build, Compose config, sintaxe YAML e `git diff --check`; a CI remota ainda será registrada após o push.
+Validações locais da atualização: instalação limpa, audit alto, lint, build, Compose config, sintaxe YAML e `git diff --check`; CI remota `38198478963` verde nos dois jobs.
 
 *Fim do plano. Gerado por leitura direta do código em 2026-10-05 a partir de `/home/servidor/Git/port_front` (branch `master`, confirmada). Nenhum `arquivo:linha` foi inferido. Validação do contrato: `python3 /tmp/validate.py port_front`.*
 
